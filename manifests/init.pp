@@ -34,6 +34,10 @@ class syslogng (
   $ensure          = present,
   $conf_dir        = '/etc/syslog-ng',
   $log_dir         = '/var/log',
+  $sources         = {
+    'default' => {},
+    'kernel'  => {},
+  },
   $services        = {
     'syslog-ng' => {},
   },
@@ -113,27 +117,27 @@ class syslogng (
     "${conf_dir}/syslog-ng.conf.d/log.d/99_catch-all.conf":
       ensure => $ensure_file,
       source => "${confd_path}/log.d/99_catch-all.conf";
-  } -> syslogng::source {
-    [
-      'default',
-      'kernel',
-    ]:
-      ensure   => $ensure,
-      conf_dir => $conf_dir;
   } ~> service { 'syslog-ng':
     ensure => $ensure_service,
     enable => $enable_service,
   }
 
-  create_resources(syslogng::destination, $destinations, {
+  create_resources(syslogng::source, $sources, {
     ensure   => $ensure,
     conf_dir => $conf_dir,
-    notify   => Service['syslog-ng']
+    notify   => Service['syslog-ng'],
   })
 
   create_resources(syslogng::service, $services, {
     ensure   => $ensure,
     conf_dir => $conf_dir,
-    notify   => Service['syslog-ng']
+    notify   => Service['syslog-ng'],
   })
+
+  create_resources(syslogng::destination, $destinations, {
+    ensure   => $ensure,
+    conf_dir => $conf_dir,
+    notify   => Service['syslog-ng'],
+  })
+
 }
