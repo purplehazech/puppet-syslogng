@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'syslogng::source' do
   context "callable with params" do
-    let(:title) { 'messages' }
+    let(:title) { 'default' }
     let(:params) do
       {
         :ensure => 'present',
@@ -18,14 +18,14 @@ describe 'syslogng::source' do
     }
   end
   context "removeable" do
-    let(:title) { 'messages' }
+    let(:title) { 'default' }
     let(:params) do
       {
 	:ensure => 'absent',
       }
     end
     it {
-      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/source.d/messages.conf").with({:ensure => 'absent'})
+      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/source.d/default.conf").with({:ensure => 'absent'})
     }
   end
 end
