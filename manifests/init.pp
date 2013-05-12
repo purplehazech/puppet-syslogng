@@ -13,11 +13,16 @@ class syslogng ($ensure = present) {
   package { 'syslog-ng':
     ensure => $ensure
   } -> file {
-    '/etc/syslog-ng/syslog-ng.conf':
-      source => 'puppet:///modules/syslogng/scl/syslog-ng.conf';
-    '/etc/syslog-ng/scl.conf':
-      source => 'puppet:///modules/syslogng/scl/scl.conf';
-    '/etc/syslog-ng/modules.conf':
-      source => 'puppet:///modules/syslogng/scl/modules.conf';
+    [
+      '/etc/syslog-ng/syslog-ng.conf',
+      '/etc/syslog-ng/scl.conf',
+      '/etc/syslog-ng/modules.conf'
+    ]:
+      ensure => 'file',
+      source => [
+        'puppet:///modules/syslogng/scl/syslog-ng.conf',
+        'puppet:///modules/syslogng/scl/scl.conf',
+        'puppet:///modules/syslogng/scl/modules.conf'
+      ]
   }
 }
