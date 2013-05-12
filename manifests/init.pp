@@ -9,9 +9,20 @@
 # [*conf_dir*]
 #  base directory of syslog-ng config files.
 #
-class syslogng ($ensure = present, $conf_dir = '/etc/syslog-ng') {
+class syslogng (
+  $ensure          = present,
+  $conf_dir        = '/etc/syslog-ng',
+  $chain_hostnames = false,
+  $flush_lines     = 0,
+  $log_fifo_size   = 1000,
+  $stats_freq      = 43200
+) {
   validate_re($ensure, [ '^present', '^absent' ])
   validate_absolute_path($conf_dir)
+  validate_bool($chain_hostnames)
+  validate_re($flush_lines, '^[0-9]+$')
+  validate_re($log_fifo_size, '^[0-9]+$')
+  validate_re($stats_freq, '^[0-9]+$')
 
   $ensure_file = $ensure ? {
     present => file,
@@ -28,6 +39,10 @@ class syslogng ($ensure = present, $conf_dir = '/etc/syslog-ng') {
   $enable_service = $ensure ? {
     present => true,
     default => false,
+  }
+  $real_chain_hostnames = $chain_hostnames ? {
+    true    => 'yes',
+    default => 'no'
   }
 
   package { 'syslog-ng':
@@ -56,6 +71,13 @@ class syslogng ($ensure = present, $conf_dir = '/etc/syslog-ng') {
       "${conf_dir}/syslog-ng.conf.d/service.d",
     ]:
       ensure => $ensure_directory;
+    [
+      "${conf_dir}/syslog-ng.conf.d/option.d/default.conf",
+    ]:
+      ensure  => $ensure_file,
+      content => [
+        template('syslogng/syslog-ng.conf.d/option.d/default.conf.erb')
+      ];
   } ~> service { 'syslog-ng':
     ensure => $ensure_service,
     enable => $enable_service,
