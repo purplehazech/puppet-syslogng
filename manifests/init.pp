@@ -1,8 +1,35 @@
 # == Class: syslogng
 #
-# The syslog class is used to install install syslog-ng.
+# The syslog class is the main entry point for admins that want to take control
+# of their syslog-ng infrastructure using puppet.
+#
+# === Usages
+#
+# Sources, services and destinations are stored as files.
+# * files/scl/syslog-ng.conf.d
+#
+# An example config using files from there looks like so.
+#
+#   class { syslogng:
+#     ensure        => present,
+#
+#     sources       => {
+#       "default"   => {},
+#       "kernel"    => {},
+#     },
+#     services      => {
+#       "syslog-ng" => {},
+#       "radius"    => {},
+#     },
+#     destinations  => {
+#       "messages"  => {},
+#       "console"   => {},
+#       "kernel"    => {},
+#     },
+#   }
 #
 # === Parameters
+#
 # [*ensure*]
 # Main module switch used to enable or disable installation and configuration
 # of syslog-ng package.
@@ -11,9 +38,16 @@
 # [*log_dir*]
 # Base directory to log into, this is where a syslog subdir is created.
 # Default: /var/log
+# [*sources*]
+# Hash of sources to configure. Default:
+#   {
+#     'default' => {},
+#     'kernel' => {}
+#   }
 # [*services*]
 # Hash of services to configure. Default: 
 #   { 'syslog-ng' => {} }
+# See the README for a complete list of services.
 # [*destinations*]
 # Hash of log destinations. Default:
 #   {
