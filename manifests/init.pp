@@ -45,7 +45,7 @@
 #     'kernel' => {}
 #   }
 # [*services*]
-# Hash of services to configure. Default: 
+# Hash of services to configure. Default:
 #   { 'syslog-ng' => {} }
 # See the README for a complete list of services.
 # [*destinations*]
