@@ -44,7 +44,7 @@ describe 'syslogng' do
     }
   end
   context "will manage syslog-ng conf files" do
-    let(:param) do
+    let(:params) do
       {
         :ensure => 'present'
       }
@@ -56,7 +56,7 @@ describe 'syslogng' do
     }
   end
   context "uninstall config files" do
-    let(:param) do
+    let(:params) do
       {
         :ensure => 'absent'
       }
