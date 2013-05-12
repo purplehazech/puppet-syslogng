@@ -151,7 +151,7 @@ describe 'syslogng' do
   context "check for hostname chain config" do
     let(:params) do
       {
-        :chain_hostnames => 'true'
+        :chain_hostnames => true
       }
     end
     it {
