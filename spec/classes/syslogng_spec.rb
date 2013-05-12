@@ -54,4 +54,5 @@ describe 'syslogng' do
       should contain_file('/etc/syslog-ng/scl.conf')
       should contain_file('/etc/syslog-ng/modules.conf')
     }
+  end
 end
