@@ -267,7 +267,7 @@ describe 'syslogng' do
     end
     it {
       should contain_syslogng__source('default').with({:ensure => 'present'})
-      should contain syslogng__source('kernel').with({:ensure => 'absent'})
+      should contain_syslogng__source('kernel').with({:ensure => 'absent'})
     }
   end
 end
