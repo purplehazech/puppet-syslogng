@@ -10,6 +10,12 @@
 class syslogng ($ensure = present) {
   validate_re($ensure, [ '^present', '^absent' ])
 
+notify{"$ensure":}
+  $ensure_file = $ensure ? {
+    present => file,
+    default => $ensure,
+  }
+
   package { 'syslog-ng':
     ensure => $ensure
   } -> file {
@@ -18,7 +24,7 @@ class syslogng ($ensure = present) {
       '/etc/syslog-ng/scl.conf',
       '/etc/syslog-ng/modules.conf'
     ]:
-      ensure => 'file',
+      ensure => $ensure_file,
       source => [
         'puppet:///modules/syslogng/scl/syslog-ng.conf',
         'puppet:///modules/syslogng/scl/scl.conf',
