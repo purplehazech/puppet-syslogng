@@ -91,7 +91,14 @@ class syslogng (
       content => [
         template('syslogng/syslog-ng.conf.d/option.d/default.conf.erb')
       ];
-  } ~> service { 'syslog-ng':
+  } syslogng::destination {
+    [
+      'messages',
+      'console',
+      'kernel',
+    ]:
+      ensure => $ensure
+  }~> service { 'syslog-ng':
     ensure => $ensure_service,
     enable => $enable_service,
   }
