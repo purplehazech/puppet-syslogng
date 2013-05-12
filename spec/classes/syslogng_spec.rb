@@ -50,9 +50,9 @@ describe 'syslogng' do
       }
     end
     it {
-      should contain_file('/etc/syslog-ng/syslog-ng.conf')
-      should contain_file('/etc/syslog-ng/scl.conf')
-      should contain_file('/etc/syslog-ng/modules.conf')
+      should contain_file('/etc/syslog-ng/syslog-ng.conf').with({:ensure => 'file'})
+      should contain_file('/etc/syslog-ng/scl.conf').with({:ensure => 'file'})
+      should contain_file('/etc/syslog-ng/modules.conf').with({:ensure => 'file'})
     }
   end
 end
