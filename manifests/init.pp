@@ -7,7 +7,7 @@
 #  main module switch used to enable or disable installation and configuration
 #  of syslog-ng package.
 #
-class syslogng ($ensure = present) {
+class syslogng ($ensure = present, $conf_dir = '/etc/syslog-ng/') {
   validate_re($ensure, [ '^present', '^absent' ])
 
   $ensure_file = $ensure ? {
@@ -30,26 +30,27 @@ class syslogng ($ensure = present) {
   package { 'syslog-ng':
     ensure => $ensure
   } -> file {
+    "${conf_dir}syslog-ng.conf":
+      ensure  => $ensure_file,
+      content => template('syslogng/syslog-ng.conf.erb');
     [
-      '/etc/syslog-ng/syslog-ng.conf',
-      '/etc/syslog-ng/scl.conf',
-      '/etc/syslog-ng/modules.conf',
+      "${conf_dir}scl.conf",
+      "${conf_dir}modules.conf",
     ]:
       ensure => $ensure_file,
       source => [
-        'puppet:///modules/syslogng/scl/syslog-ng.conf',
         'puppet:///modules/syslogng/scl/scl.conf',
         'puppet:///modules/syslogng/scl/modules.conf',
       ];
     [
-      '/etc/syslog-ng/patterndb.d',
-      '/etc/syslog-ng/syslog-ng.conf.d',
-      '/etc/syslog-ng/syslog-ng.conf.d/destination.d',
-      '/etc/syslog-ng/syslog-ng.conf.d/filter.d',
-      '/etc/syslog-ng/syslog-ng.conf.d/source.d',
-      '/etc/syslog-ng/syslog-ng.conf.d/log.d',
-      '/etc/syslog-ng/syslog-ng.conf.d/option.d',
-      '/etc/syslog-ng/syslog-ng.conf.d/service.d',
+      "${conf_dir}patterndb.d",
+      "${conf_dir}syslog-ng.conf.d",
+      "${conf_dir}syslog-ng.conf.d/destination.d",
+      "${conf_dir}syslog-ng.conf.d/filter.d",
+      "${conf_dir}syslog-ng.conf.d/source.d",
+      "${conf_dir}syslog-ng.conf.d/log.d",
+      "${conf_dir}syslog-ng.conf.d/option.d",
+      "${conf_dir}syslog-ng.conf.d/service.d",
     ]:
       ensure => $ensure_directory;
   } ~> service { 'syslog-ng':

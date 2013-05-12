@@ -1,0 +1,59 @@
+###############################################################################
+# Modular syslog-ng configuration, with one log file per daemon or service 
+#
+# The log files are stored below /var/log/syslog/<daemon>.log
+# Log messages which aren't assosiated with a specifc service or daemon will be
+# logged to the catch-all /var/log/messages log file.
+#
+# Authors:
+#  Christian Affolter <christian.affolter@stepping-stone.ch>
+#
+
+@version: 3.2
+@include "scl.conf"
+
+
+### Global and environmental variables ###
+#
+# default filesystem log path
+@define log_base_dir "/var/log"
+@define syslog_dir "`log_base_dir`/syslog"
+
+# include base directory
+@define include_base_dir "<%= @conf_dir %>syslog-ng.conf.d"
+
+
+### Options ###
+#
+# include all options definitions
+include "`include_base_dir`/option.d";
+
+
+### Sources ###
+#
+# include all log sources
+include "`include_base_dir`/source.d";
+
+
+### Filters ###
+#
+# include all common filters
+include "`include_base_dir`/filter.d";
+
+
+### Destinations ###
+#
+# include all common destinations
+include "`include_base_dir`/destination.d";
+
+
+### Services ###
+#
+# include specific daemon and service configurations
+include "`include_base_dir`/service.d";
+
+
+### Log paths ###
+#
+# include all log destinations
+include "`include_base_dir`/log.d";
