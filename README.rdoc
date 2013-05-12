@@ -43,6 +43,6 @@ If you remove a service you need to do so manually.
     },
   }
 
-The propery way to do all this would be from an external node classifier. A smart api
-for module developers who would liek to integrate with this module is still in the
+The proper way to do all this would be from an external node classifier. A smart api
+for module developers who would like to integrate with this module is still in the
 works.
