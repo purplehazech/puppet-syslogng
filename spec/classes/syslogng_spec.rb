@@ -216,4 +216,14 @@ describe 'syslogng' do
       )
     }
   end
+  context "catch all config" do
+    it {
+      should contain_file('/etc/syslog-ng/syslog-ng.conf.d/log.d/99_catch-all.conf').with(
+        {
+	  :ensure => 'file',
+	  :source => 'puppet:///modules/syslogng/scl/syslog-ng.conf.d/log.d/99_catch-all.conf'
+        }
+      )
+    }
+  end
 end
