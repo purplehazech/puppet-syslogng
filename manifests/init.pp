@@ -8,6 +8,14 @@
 #  of syslog-ng package.
 # [*conf_dir*]
 #  base directory of syslog-ng config files.
+# [*chain_hostnames*]
+#  Enable or disable the chained hostname format. Default: false
+# [*flush_lines*]
+#  Specifies how many lines are flushed to a destination at a time. Default: 0 
+# [*log_fifo_size*]
+#  The number of entries in the output fifo.
+# [*stats_freq*]
+#  The period between two STATS messages in seconds.
 #
 class syslogng (
   $ensure          = present,
