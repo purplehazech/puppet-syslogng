@@ -48,6 +48,7 @@ describe 'syslogng' do
       should contain_file('/etc/syslog-ng/syslog-ng.conf').with({:ensure => 'file'})
       should contain_file('/etc/syslog-ng/scl.conf').with({:ensure => 'file'})
       should contain_file('/etc/syslog-ng/modules.conf').with({:ensure => 'file'})
+      should contain_file('/etc/syslog-ng/syslog-ng.conf.d/option.d/default.conf').with({:ensure => 'file'});
     }
   end
   context "uninstall config files" do
@@ -60,6 +61,7 @@ describe 'syslogng' do
       should contain_file('/etc/syslog-ng/syslog-ng.conf').with({:ensure => 'absent'})
       should contain_file('/etc/syslog-ng/scl.conf').with({:ensure => 'absent'})
       should contain_file('/etc/syslog-ng/modules.conf').with({:ensure => 'absent'})
+      should contain_file('/etc/syslog-ng/syslog-ng.conf.d/option.d/default.conf').with({:ensure => 'absent'});
     }
   end
   context "check for config dirs" do
@@ -135,6 +137,55 @@ describe 'syslogng' do
     end
     it {
       expect { should contain_class('syslogng') }.to raise_error Puppet::Error, /is not an absolute path/
+    }
+  end
+  context "check for default options" do
+    it {
+      should contain_file('/etc/syslog-ng/syslog-ng.conf.d/option.d/default.conf').with_content(/.*options {.*/);
+      should contain_file('/etc/syslog-ng/syslog-ng.conf.d/option.d/default.conf').with_content(/.*chain_hostnames\(no\);.*/);
+      should contain_file('/etc/syslog-ng/syslog-ng.conf.d/option.d/default.conf').with_content(/.*flush_lines\(0\);.*/);
+      should contain_file('/etc/syslog-ng/syslog-ng.conf.d/option.d/default.conf').with_content(/.*log_fifo_size\(1000\);.*/);
+      should contain_file('/etc/syslog-ng/syslog-ng.conf.d/option.d/default.conf').with_content(/.*stats_freq\(43200\);.*/);
+    }
+  end
+  context "check for hostname chain config" do
+    let(:params) do
+      {
+        :chain_hostnames => 'true'
+      }
+    end
+    it {
+      should contain_file('/etc/syslog-ng/syslog-ng.conf.d/option.d/default.conf').with_content(/.*chain_hostnames\(yes\);.*/);
+    }
+  end
+  context "check for flush_lines config" do
+    let(:params) do
+      {
+        :flush_lines => '10'
+      }
+    end
+    it {
+      should contain_file('/etc/syslog-ng/syslog-ng.conf.d/option.d/default.conf').with_content(/.*flush_lines\(10\);.*/);
+    }
+  end
+  context "check for log_fifo_size config" do
+    let(:params) do
+      {
+        :log_fifo_size => '100000'
+      }
+    end
+    it {
+      should contain_file('/etc/syslog-ng/syslog-ng.conf.d/option.d/default.conf').with_content(/.*log_fifo_size\(100000\);.*/);
+    }
+  end
+  context "check for stats_freq config" do
+    let (:params) do
+      {
+        :stats_freq => '600'
+      }
+    end
+    it {
+      should contain_file('/etc/syslog-ng/syslog-ng.conf.d/option.d/default.conf').with_content(/.*stats_freq\(600\);.*/);
     }
   end
 end
