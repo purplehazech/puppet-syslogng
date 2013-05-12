@@ -96,4 +96,14 @@ describe 'syslogng' do
       should contain_service('syslog-ng').with({:ensure => 'running', :enable => 'true'})
     }
   end
+  context "stop service completely" do
+    let(:params) do
+      {
+        :ensure => 'absent'
+      }
+    end
+    it {
+      should contain_service('syslog-ng').with({:ensure => 'stopped', :enable => false})
+    }
+  end
 end
