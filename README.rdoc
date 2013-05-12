@@ -10,8 +10,31 @@ templates as i go.
 
 For the scope of this module I am defining completeness as follows:
 
-* manage installation of syslog-ng package
-* built in support for a lot of logs
+* manage installation of syslog-ng package, done
+* built in support for a lot of logs, done
 * manage client/server setup with storeconfigs
 * good documentation
- 
+
+=== Usage
+
+For a simple solution just include the module. This mostly just install a bare
+syslog-ng configuration.
+
+  {
+  "classes": {
+    "syslog-ng"
+  }
+
+Let's say you need to monitor some services. You can use the create_resources api
+to specify the services you need.
+
+  {
+  "classes": {
+    "syslog-ng": {
+      "services": {
+        "syslog-ng": "",
+	"radius": ""
+      }
+    }
+  }
+
