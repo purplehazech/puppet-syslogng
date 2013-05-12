@@ -45,11 +45,11 @@ If you remove a service you need to do so manually.
     "classes": {
       "syslog-ng": {
         "services": {
-	  "syslog-ng": "",
-	  "radius": {
-	    "ensure": "absent"
-	  }
-	}
+          "syslog-ng": "",
+          "radius": {
+            "ensure": "absent"
+          }
+        }
       }
     }
   }
