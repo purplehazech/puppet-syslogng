@@ -62,4 +62,9 @@ describe 'syslogng' do
       should contain_file('/etc/syslog-ng/modules.conf').with({:ensure => 'absent'})
     }
   end
+  context "start and ensure service" do
+    it {
+      should contain_service('syslog-ng').with({:ensure => 'running', :enable => 'true'})
+    }
+  end
 end
