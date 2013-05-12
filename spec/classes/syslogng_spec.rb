@@ -248,4 +248,15 @@ describe 'syslogng' do
       should contain_syslogng__service('radius').with({:ensure => 'present'})
     }
   end
+  context "destination config from param" do
+    let(:params) do
+      {
+        :destinations => { "messages" => {}, "console" => { "ensure" => 'absent' } }
+      }
+    end
+    it {
+      should contain_syslogng__destination('messages').with({:ensure => 'present'})
+      should contain_syslogng__destination('console').with({:ensure => 'absent'})
+    }
+  end
 end
