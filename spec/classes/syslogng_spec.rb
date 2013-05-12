@@ -226,4 +226,10 @@ describe 'syslogng' do
       )
     }
   end
+  context "define sources" do
+    it {
+      should contain_syslogng_source('default').with({:ensure => 'present'})
+      should contain_syslogng_source('kernel').with({:ensure => 'present'})
+    }
+  end
 end
