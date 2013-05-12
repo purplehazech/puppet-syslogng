@@ -43,4 +43,15 @@ describe 'syslogng' do
       should contain_package('syslog-ng').with({:ensure => 'absent'})
     }
   end
+  context "will manage syslog-ng conf files" do
+    let(:param) do
+      {
+        :ensure => 'present'
+      }
+    end
+    it {
+      should contain_file('/etc/syslog-ng/syslog-ng.conf')
+      should contain_file('/etc/syslog-ng/scl.conf')
+      should contain_file('/etc/syslog-ng/modules.conf')
+    }
 end
