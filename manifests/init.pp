@@ -24,6 +24,9 @@ class syslogng (
   $ensure          = present,
   $conf_dir        = '/etc/syslog-ng',
   $log_dir         = '/var/log',
+  $services        = {
+    'syslog-ng' => {}
+  },
   $chain_hostnames = false,
   $flush_lines     = 0,
   $log_fifo_size   = 1000,
@@ -102,10 +105,6 @@ class syslogng (
     ]:
       ensure   => $ensure,
       conf_dir => $conf_dir;
-  } -> syslogng::service {
-    'syslog-ng':
-      ensure   => $ensure,
-      conf_dir => $conf_dir;
   } -> syslogng::destination {
     [
       'messages',
@@ -118,4 +117,10 @@ class syslogng (
     ensure => $ensure_service,
     enable => $enable_service,
   }
+
+  create_resources(syslogng::service, $services, {
+    ensure   => $ensure,
+    conf_dir => $conf_dir,
+    notify   => Service['syslog-ng']
+  })
 }
