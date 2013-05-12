@@ -33,7 +33,7 @@ to specify the services you need.
     "syslog-ng": {
       "services": {
         "syslog-ng": "",
-	"radius": ""
+        "radius": ""
       }
     }
   }
