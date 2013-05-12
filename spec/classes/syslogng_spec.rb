@@ -106,4 +106,25 @@ describe 'syslogng' do
       should contain_service('syslog-ng').with({:ensure => 'stopped', :enable => false})
     }
   end
+  context "configurable base dir" do
+    let(:params) do
+      {
+        :ensure => 'present',
+        :conf_dir => '/my/conf/dir/'
+      }
+    end
+    it {
+      should contain_file('/my/conf/dir/syslog-ng.conf').with_content(/^.*\/my\/conf\/dir.*$/)
+      should contain_file('/my/conf/dir/scl.conf')
+      should contain_file('/my/conf/dir/modules.conf')
+      should contain_file('/my/conf/dir/patterndb.d')
+      should contain_file('/my/conf/dir/syslog-ng.conf.d')
+      should contain_file('/my/conf/dir/syslog-ng.conf.d/destination.d')
+      should contain_file('/my/conf/dir/syslog-ng.conf.d/filter.d')
+      should contain_file('/my/conf/dir/syslog-ng.conf.d/source.d')
+      should contain_file('/my/conf/dir/syslog-ng.conf.d/log.d')
+      should contain_file('/my/conf/dir/syslog-ng.conf.d/option.d')
+      should contain_file('/my/conf/dir/syslog-ng.conf.d/service.d')
+    }
+  end
 end
