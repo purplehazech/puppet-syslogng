@@ -4,7 +4,7 @@
 #
 # === Parameters
 # [*ensure*]
-#  main module switch used to enable or disable installation and configuration 
+#  main module switch used to enable or disable installation and configuration
 #  of syslog-ng package.
 #
 class syslogng ($ensure = present) {
