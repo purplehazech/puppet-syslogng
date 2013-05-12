@@ -1,5 +1,7 @@
 == puppet syslog-ng
 
+{<img src="https://travis-ci.org/purplehazech/puppet-syslogng.png?branch=master" alt="Build Status" />}[https://travis-ci.org/purplehazech/puppet-syslogng]
+
 This repository will eventually contain a complete syslog-ng setup.
 
 The idea is to use the rather complete scl configuration in the stepping-stone
