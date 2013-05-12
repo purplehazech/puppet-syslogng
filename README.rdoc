@@ -20,37 +20,29 @@ For the scope of this module I am defining completeness as follows:
 For a simple solution just include the module. This mostly just install a bare
 syslog-ng configuration.
 
-  {
-    "classes": {
-      "syslog-ng": ""
-  }
+  class { 'syslogng': }
 
 Let's say you need to monitor some services. You can use the create_resources api
 to specify the services you need.
 
-  {
-    "classes": {
-      "syslog-ng": {
-        "services": {
-          "syslog-ng": "",
-          "radius": ""
-        }
-      }
-    }
+  class { 'syslogng':
+    services => {
+      'syslog-ng' => {},
+      'radius' => {},
+    },
   }
 
 If you remove a service you need to do so manually.
 
-  {
-    "classes": {
-      "syslog-ng": {
-        "services": {
-          "syslog-ng": "",
-          "radius": {
-            "ensure": "absent"
-          }
-        }
-      }
-    }
+  class { 'syslogng':
+    services => {
+      'syslog-ng' => {},
+      'radius' => {
+        ensure => absent,
+      },
+    },
   }
 
+The propery way to do all this would be from an external node classifier. A smart api
+for module developers who would liek to integrate with this module is still in the
+works.
