@@ -110,7 +110,7 @@ describe 'syslogng' do
     let(:params) do
       {
         :ensure => 'present',
-        :conf_dir => '/my/conf/dir/'
+        :conf_dir => '/my/conf/dir'
       }
     end
     it {
@@ -125,6 +125,16 @@ describe 'syslogng' do
       should contain_file('/my/conf/dir/syslog-ng.conf.d/log.d')
       should contain_file('/my/conf/dir/syslog-ng.conf.d/option.d')
       should contain_file('/my/conf/dir/syslog-ng.conf.d/service.d')
+    }
+  end
+  context "check for invalid conf dirs" do
+    let(:params) do
+      {
+        :conf_dir => 'Hello World!'
+      }
+    end
+    it {
+      expect { should contain_class('syslogng') }.to raise_error Puppet::Error, /is not an absolute path/
     }
   end
 end
