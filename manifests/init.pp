@@ -27,6 +27,11 @@ class syslogng (
   $services        = {
     'syslog-ng' => {}
   },
+  $destinations    = {
+    'messages' => {},
+    'console' => {},
+    'kernel' => {},
+  },
   $chain_hostnames = false,
   $flush_lines     = 0,
   $log_fifo_size   = 1000,
@@ -105,18 +110,16 @@ class syslogng (
     ]:
       ensure   => $ensure,
       conf_dir => $conf_dir;
-  } -> syslogng::destination {
-    [
-      'messages',
-      'console',
-      'kernel',
-    ]:
-      ensure   => $ensure,
-      conf_dir => $conf_dir,
   } ~> service { 'syslog-ng':
     ensure => $ensure_service,
     enable => $enable_service,
   }
+
+  create_resources(syslogng::destination, $destinations, {
+    ensure   => $ensure,
+    conf_dir => $conf_dir,
+    notify   => Service['syslog-ng']
+  })
 
   create_resources(syslogng::service, $services, {
     ensure   => $ensure,
