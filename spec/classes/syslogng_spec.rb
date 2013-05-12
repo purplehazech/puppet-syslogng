@@ -1,11 +1,6 @@
 require 'spec_helper'
 
 describe 'syslogng' do
-  subject do
-    # This makes sure the function is loaded within each test
-    function_name = Puppet::Parser::Functions.function(:validate_re)
-    scope.method(function_name)
-  end
   context "callable with params" do
     let(:params) do
       {
@@ -30,7 +25,7 @@ describe 'syslogng' do
       }
     end
     it {
-      expect { subject.call ['invalid'] }.to raise_error Puppet::Error
+      expect { should contain_class('syslogng') }.to raise_error Puppet::Error
     }
   end
   context "will remove package" do
