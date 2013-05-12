@@ -237,4 +237,15 @@ describe 'syslogng' do
       should contain_syslogng__service('syslog-ng').with({:ensure => 'present'})
     }
   end
+  context "service config from param" do
+    let(:params) do
+      {
+        :services => { "syslog-ng" => {}, "radius" => {} }
+      }
+    end
+    it {
+      should contain_syslogng__service('syslog-ng').with({:ensure => 'present'})
+      should contain_syslogng__service('radius').with({:ensure => 'present'})
+    }
+  end
 end
