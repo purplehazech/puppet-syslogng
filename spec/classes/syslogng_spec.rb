@@ -206,4 +206,14 @@ describe 'syslogng' do
       should contain_syslogng__destination('kernel').with({:ensure => 'present'})
     }
   end
+  context "default facilities" do
+    it {
+      should contain_file('/etc/syslog-ng/syslog-ng.conf.d/filter.d/facilities.conf').with(
+        {
+	  :ensure => 'file',
+	  :source => 'puppet:///modules/syslogng/scl/syslog-ng.conf.d/filter.d/facilities.conf'
+        }
+      )
+    }
+  end
 end
