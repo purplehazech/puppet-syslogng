@@ -4,33 +4,43 @@
 #
 # === Parameters
 # [*ensure*]
-#  main module switch used to enable or disable installation and configuration
-#  of syslog-ng package.
+# Main module switch used to enable or disable installation and configuration
+# of syslog-ng package.
 # [*conf_dir*]
-#  base directory of syslog-ng config files.
+# Base directory of syslog-ng config files.
 # [*log_dir*]
-#  base directory to log into, this is where a syslog subdir is created.
-#  Default: /var/log
+# Base directory to log into, this is where a syslog subdir is created.
+# Default: /var/log
+# [*services*]
+# Hash of services to configure. Default: 
+#   { 'syslog-ng' => {} }
+# [*destinations*]
+# Hash of log destinations. Default:
+#   {
+#     'messages' => {},
+#     'console'  => {},
+#     'kernel'   => {},
+#   }
 # [*chain_hostnames*]
-#  Enable or disable the chained hostname format. Default: false
+# Enable or disable the chained hostname format. Default: false
 # [*flush_lines*]
-#  Specifies how many lines are flushed to a destination at a time. Default: 0
+# Specifies how many lines are flushed to a destination at a time. Default: 0
 # [*log_fifo_size*]
-#  The number of entries in the output fifo.
+# The number of entries in the output fifo.
 # [*stats_freq*]
-#  The period between two STATS messages in seconds.
+# The period between two STATS messages in seconds.
 #
 class syslogng (
   $ensure          = present,
   $conf_dir        = '/etc/syslog-ng',
   $log_dir         = '/var/log',
   $services        = {
-    'syslog-ng' => {}
+    'syslog-ng' => {},
   },
   $destinations    = {
     'messages' => {},
-    'console' => {},
-    'kernel' => {},
+    'console'  => {},
+    'kernel'   => {},
   },
   $chain_hostnames = false,
   $flush_lines     = 0,
