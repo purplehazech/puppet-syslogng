@@ -199,4 +199,11 @@ describe 'syslogng' do
       should contain_file('/my/log/dir/syslog').with({:ensure => 'directory'});
     }
   end
+  context "check for default destinations" do
+    it {
+      should contain_syslogng__destination('messages').with({:ensure => 'present'})
+      should contain_syslogng__destination('console').with({:ensure => 'present'})
+      should contain_syslogng__destination('kernel').with({:ensure => 'present'})
+    }
+  end
 end
