@@ -87,6 +87,9 @@ class syslogng (
     "${conf_dir}/syslog-ng.conf.d/filter.d/facilities.conf":
       ensure => $ensure_file,
       source => 'puppet:///modules/syslogng/scl/syslog-ng.conf.d/filter.d/facilities.conf';
+    "${conf_dir}/syslog-ng.conf.d/log.d/99_catch-all.conf":
+      ensure => $ensure_file,
+      source => 'puppet:///modules/syslogng/scl/syslog-ng.conf.d/log.d/99_catch-all.conf';
   } syslogng::destination {
     [
       'messages',
