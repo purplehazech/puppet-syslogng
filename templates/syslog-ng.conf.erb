@@ -16,8 +16,8 @@
 ### Global and environmental variables ###
 #
 # default filesystem log path
-@define log_base_dir "/var/log"
-@define syslog_dir "`log_base_dir`/syslog"
+@define log_base_dir "<%= @log_dir %>"
+@define syslog_dir "<%= @log_dir %>/syslog"
 
 # include base directory
 @define include_base_dir "<%= @conf_dir %>syslog-ng.conf.d"

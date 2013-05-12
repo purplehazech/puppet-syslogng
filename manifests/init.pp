@@ -8,6 +8,8 @@
 #  of syslog-ng package.
 # [*conf_dir*]
 #  base directory of syslog-ng config files.
+# [*log_dir*]
+#  base directory to log into, this is where a syslog subdir is created. Default: /var/log
 # [*chain_hostnames*]
 #  Enable or disable the chained hostname format. Default: false
 # [*flush_lines*]
@@ -20,6 +22,7 @@
 class syslogng (
   $ensure          = present,
   $conf_dir        = '/etc/syslog-ng',
+  $log_dir         = '/var/log',
   $chain_hostnames = false,
   $flush_lines     = 0,
   $log_fifo_size   = 1000,
@@ -27,6 +30,7 @@ class syslogng (
 ) {
   validate_re($ensure, [ '^present', '^absent' ])
   validate_absolute_path($conf_dir)
+  validate_absolute_path($log_dir)
   validate_bool($chain_hostnames)
   validate_re($flush_lines, '^[0-9]+$')
   validate_re($log_fifo_size, '^[0-9]+$')
@@ -69,6 +73,7 @@ class syslogng (
         'puppet:///modules/syslogng/scl/modules.conf',
       ];
     [
+      "${log_dir}/syslog",
       "${conf_dir}/patterndb.d",
       "${conf_dir}/syslog-ng.conf.d",
       "${conf_dir}/syslog-ng.conf.d/destination.d",
