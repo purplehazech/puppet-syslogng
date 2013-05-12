@@ -25,7 +25,7 @@ describe 'syslogng::destination' do
       }
     end
     it {
-      should contain_file("etc/syslog-ng/syslog-ng.conf.d/destination.d/messages.conf").with({:ensure => 'absent'})
+      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/destination.d/messages.conf").with({:ensure => 'absent'})
     }
   end
 end
