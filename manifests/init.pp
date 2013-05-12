@@ -9,7 +9,8 @@
 # [*conf_dir*]
 #  base directory of syslog-ng config files.
 # [*log_dir*]
-#  base directory to log into, this is where a syslog subdir is created. Default: /var/log
+#  base directory to log into, this is where a syslog subdir is created.
+#  Default: /var/log
 # [*chain_hostnames*]
 #  Enable or disable the chained hostname format. Default: false
 # [*flush_lines*]
@@ -56,6 +57,10 @@ class syslogng (
     true    => 'yes',
     default => 'no',
   }
+  $confd_path = 'puppet:///modules/syslogng/scl/syslog-ng.conf.d'
+  $default_conf = template(
+    'syslogng/syslog-ng.conf.d/option.d/default.conf.erb'
+  )
 
   package { 'syslog-ng':
     ensure => $ensure
@@ -83,21 +88,29 @@ class syslogng (
       ensure => $ensure_directory;
     "${conf_dir}/syslog-ng.conf.d/option.d/default.conf":
       ensure  => $ensure_file,
-      content => template('syslogng/syslog-ng.conf.d/option.d/default.conf.erb');
+      content => $default_conf;
     "${conf_dir}/syslog-ng.conf.d/filter.d/facilities.conf":
       ensure => $ensure_file,
-      source => 'puppet:///modules/syslogng/scl/syslog-ng.conf.d/filter.d/facilities.conf';
+      source => "${confd_path}/filter.d/facilities.conf";
     "${conf_dir}/syslog-ng.conf.d/log.d/99_catch-all.conf":
       ensure => $ensure_file,
-      source => 'puppet:///modules/syslogng/scl/syslog-ng.conf.d/log.d/99_catch-all.conf';
-  } syslogng::destination {
+      source => "${confd_path}/log.d/99_catch-all.conf";
+  } syslogng::source {
+    [
+      'default',
+      'kernel',
+    ]:
+      ensure   => $ensure,
+      conf_dir => $conf_dir,
+  } -> syslogng::destination {
     [
       'messages',
       'console',
       'kernel',
     ]:
-      ensure => $ensure
-  }~> service { 'syslog-ng':
+      ensure   => $ensure,
+      conf_dir => $conf_dir,
+  } ~> service { 'syslog-ng':
     ensure => $ensure_service,
     enable => $enable_service,
   }
