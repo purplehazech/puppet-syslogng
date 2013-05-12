@@ -95,13 +95,17 @@ class syslogng (
     "${conf_dir}/syslog-ng.conf.d/log.d/99_catch-all.conf":
       ensure => $ensure_file,
       source => "${confd_path}/log.d/99_catch-all.conf";
-  } syslogng::source {
+  } -> syslogng::source {
     [
       'default',
       'kernel',
     ]:
       ensure   => $ensure,
-      conf_dir => $conf_dir,
+      conf_dir => $conf_dir;
+  } -> syslogng::service {
+    'syslog-ng':
+      ensure   => $ensure,
+      conf_dir => $conf_dir;
   } -> syslogng::destination {
     [
       'messages',
