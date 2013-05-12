@@ -54,7 +54,7 @@ class syslogng (
   }
   $real_chain_hostnames = $chain_hostnames ? {
     true    => 'yes',
-    default => 'no'
+    default => 'no',
   }
 
   package { 'syslog-ng':
@@ -63,15 +63,12 @@ class syslogng (
     "${conf_dir}/syslog-ng.conf":
       ensure  => $ensure_file,
       content => template('syslogng/syslog-ng.conf.erb');
-    [
-      "${conf_dir}/scl.conf",
-      "${conf_dir}/modules.conf",
-    ]:
+    "${conf_dir}/scl.conf":
       ensure => $ensure_file,
-      source => [
-        'puppet:///modules/syslogng/scl/scl.conf',
-        'puppet:///modules/syslogng/scl/modules.conf',
-      ];
+      source => 'puppet:///modules/syslogng/scl/scl.conf';
+    "${conf_dir}/modules.conf":
+      ensure => $ensure_file,
+      source => 'puppet:///modules/syslogng/scl/modules.conf';
     [
       "${log_dir}/syslog",
       "${conf_dir}/patterndb.d",
@@ -84,13 +81,12 @@ class syslogng (
       "${conf_dir}/syslog-ng.conf.d/service.d",
     ]:
       ensure => $ensure_directory;
-    [
-      "${conf_dir}/syslog-ng.conf.d/option.d/default.conf",
-    ]:
+    "${conf_dir}/syslog-ng.conf.d/option.d/default.conf":
       ensure  => $ensure_file,
-      content => [
-        template('syslogng/syslog-ng.conf.d/option.d/default.conf.erb')
-      ];
+      content => template('syslogng/syslog-ng.conf.d/option.d/default.conf.erb');
+    "${conf_dir}/syslog-ng.conf.d/filter.d/facilities.conf":
+      ensure => $ensure_file,
+      source => 'puppet:///modules/syslogng/scl/syslog-ng.conf.d/filter.d/facilities.conf';
   } syslogng::destination {
     [
       'messages',
