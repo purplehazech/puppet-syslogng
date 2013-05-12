@@ -21,19 +21,35 @@ For a simple solution just include the module. This mostly just install a bare
 syslog-ng configuration.
 
   {
-  "classes": {
-    "syslog-ng"
+    "classes": {
+      "syslog-ng": ""
   }
 
 Let's say you need to monitor some services. You can use the create_resources api
 to specify the services you need.
 
   {
-  "classes": {
-    "syslog-ng": {
-      "services": {
-        "syslog-ng": "",
-        "radius": ""
+    "classes": {
+      "syslog-ng": {
+        "services": {
+          "syslog-ng": "",
+          "radius": ""
+        }
+      }
+    }
+  }
+
+If you remove a service you need to do so manually.
+
+  {
+    "classes": {
+      "syslog-ng": {
+        "services": {
+	  "syslog-ng": "",
+	  "radius": {
+	    "ensure": "absent"
+	  }
+	}
       }
     }
   }
