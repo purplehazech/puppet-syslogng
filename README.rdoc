@@ -43,9 +43,54 @@ If you remove a service you need to do so manually.
     },
   }
 
+If you want to show off all the services, you would do that like so.
+
+  class { 'syslogng':
+    services => {
+      'syslog-ng' => {},
+      'acpid' => {},
+      'amavis' => {},
+      'atftpd' => {},
+      'authdaemond' => {},
+      'clamd' => {},
+      'crond' => {},
+      'dhcpcd' => {},
+      'dhcpd' => {},
+      'dovecot' => {},
+      'fc-brokerd' => {},
+      'freshclam' => {},
+      'imapd' => {},
+      'libvirtd' => {},
+      'mod_php' => {},
+      'msmtp' => {},
+      'ntpd' => {},
+      'pdns' => {},
+      'pdns_recursor' => {},
+      'pop3d' => {},
+      'portage' => {},
+      'postfix' => {},
+      'postgres' => {},
+      'provisioning' => {},
+      'pure-ftpd' => {},
+      'racoon' => {},
+      'radiusd' => {},
+      'rsnapshot' => {},
+      'saslauthd' => {},
+      'slapd' => {},
+      'sshd' => {},
+      'ssmtp' => {},
+      'stunnel' => {},
+      'sudo' => {},
+      'ucarp' => {},
+      'ulogd' => {},
+      'vm-manager' => {},
+      'zabbix-agentd' => {},
+      'zabbix-proxy' => {},
+    }
+  }
+
 The proper way to do all this would be from an external node classifier. A smart api
-for module developers who would like to integrate with this module is still in the
-works.
+for module developers who would like to integrate with this module is in the works.
 
 === License
 
