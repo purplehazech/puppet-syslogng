@@ -33,4 +33,14 @@ describe 'syslogng' do
       expect { subject.call ['invalid'] }.to raise_error Puppet::Error
     }
   end
+  context "will remove package" do
+    let(:params) do
+      {
+        :ensure => 'absent'
+      }
+    end
+    it {
+      should contain_package('syslog-ng').with({:ensure => 'absent'})
+    }
+  end
 end
