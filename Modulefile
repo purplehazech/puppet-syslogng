@@ -1,8 +1,8 @@
 name 'purplehazech-syslogng'
-version '0.0.1'
+version '0.1.0'
 
 author 'Lucas S. Bickel'
-license 'see README.rdoc'
+license 'AGPL3+'
 project_page 'https://github.com/purplehazech/puppet-syslogng'
 source 'https://github.com/purplehazech/puppet-zabbix.git'
 summary 'install and configure syslog-ng'
