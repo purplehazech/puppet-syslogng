@@ -259,4 +259,15 @@ describe 'syslogng' do
       should contain_syslogng__destination('console').with({:ensure => 'absent'})
     }
   end
+  context "sources config from param" do
+    let(:params) do
+      {
+        :sources => { "default" => {}, "kernel" => { "ensure" => 'absent' } }
+      }
+    end
+    it {
+      should contain_syslogng__source('default').with({:ensure => 'present'})
+      should contain syslogng__source('kernel').with({:ensure => 'absent'})
+    }
+  end
 end
