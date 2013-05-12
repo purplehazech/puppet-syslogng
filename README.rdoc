@@ -1,0 +1,15 @@
+== puppet syslog-ng
+
+This repository will eventually contain a complete syslog-ng setup.
+
+The idea is to use the rather complete scl configuration in the stepping-stone
+syslog-ng[https://github.com/syslog-ng] repo as a starting point and adding
+templates as i go.
+
+For the scope of this module I am defining completeness as follows:
+
+* manage installation of syslog-ng package
+* built in support for a lot of logs
+* manage client/server setup with storeconfigs
+* good documentation
+ 
