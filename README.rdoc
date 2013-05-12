@@ -46,3 +46,18 @@ If you remove a service you need to do so manually.
 The proper way to do all this would be from an external node classifier. A smart api
 for module developers who would like to integrate with this module is still in the
 works.
+
+=== License
+
+2012, Lucas S. Bickel, Alle Rechte vorbehalten
+
+This program is free software: you can redistribute it and/or modify it under the terms
+of the GNU Affero General Public License as published by the Free Software Foundation,
+either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; 
+without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License along with this
+program. If not, see <www.gnu.org/licenses/>.
