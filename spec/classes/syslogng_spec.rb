@@ -55,4 +55,16 @@ describe 'syslogng' do
       should contain_file('/etc/syslog-ng/modules.conf').with({:ensure => 'file'})
     }
   end
+  context "uninstall config files" do
+    let(:param) do
+      {
+        :ensure => 'absent'
+      }
+    end
+    it {
+      should contain_file('/etc/syslog-ng/syslog-ng.conf').with({:ensure => 'absent'})
+      should contain_file('/etc/syslog-ng/scl.conf').with({:ensure => 'absent'})
+      should contain_file('/etc/syslog-ng/modules.conf').with({:ensure => 'absent'})
+    }
+  end
 end
