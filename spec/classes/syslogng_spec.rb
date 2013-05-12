@@ -188,4 +188,15 @@ describe 'syslogng' do
       should contain_file('/etc/syslog-ng/syslog-ng.conf.d/option.d/default.conf').with_content(/.*stats_freq\(600\);.*/);
     }
   end
+  context "should configure logdir" do
+    let (:params) do
+      {
+        :log_dir => '/my/log/dir'
+      }
+    end
+    it {
+      should contain_file('/etc/syslog-ng/syslog-ng.conf').with_content(/^.*\/my\/log\/dir\/syslog.*$/)
+      should contain_file('/my/log/dir/syslog').with({:ensure => 'directory'});
+    }
+  end
 end
