@@ -232,4 +232,9 @@ describe 'syslogng' do
       should contain_syslogng__source('kernel').with({:ensure => 'present'})
     }
   end
+  context "define syslog-ng service" do
+    it {
+      should contain_syslogng__service('syslog-ng').with({:ensure => 'present'})
+    }
+  end
 end
