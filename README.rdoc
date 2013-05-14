@@ -89,6 +89,9 @@ If you want to show off all the services, you would do that like so.
     }
   }
 
+There is no way to include all the available services automatically. It was a 
+conscious design decision not to implement that.
+
 The proper way to do all this would be from an external node classifier. A smart api
 for module developers who would like to integrate with this module is in the works.
 
