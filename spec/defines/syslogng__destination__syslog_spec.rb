@@ -12,13 +12,13 @@ describe 'syslogng::destination::syslog' do
       should contain_file("/etc/syslog-ng/syslog-ng.conf.d/destination.d/syslog_remote-server-hostname.conf").with(
         {
           :ensure  => 'file',
-          :content => /^destination d_syslog_remote-server-hostname.*$/,
+          :content => /^.*destination d_syslog_remote-server-hostname.*$/,
         }
       )
       should contain_file("/etc/syslog-ng/syslog-ng.conf.d/log.d/00_syslog_syslog-ng.conf").with(
         {
           :ensure  => 'file',
-          :content => /^log \{ source\(s_log\); filter\(f_syslog-ng\); destination\(d_syslog_remote-server-hostname\); \};/,
+          :content => /^.*log \{ source\(s_log\); filter\(f_syslog-ng\); destination\(d_syslog_remote-server-hostname\); \};.*/,
         }
       )
     }
