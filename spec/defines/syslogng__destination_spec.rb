@@ -11,9 +11,9 @@ describe 'syslogng::destination' do
     it {
       should contain_file("/etc/syslog-ng/syslog-ng.conf.d/destination.d/messages.conf").with(
         {
-	  :ensure => 'file',
-	  :source => 'puppet:///modules/syslogng/scl/syslog-ng.conf.d/destination.d/messages.conf'
-	}
+          :ensure => 'file',
+          :source => 'puppet:///modules/syslogng/scl/syslog-ng.conf.d/destination.d/messages.conf'
+        }
       )
     }
   end
@@ -21,7 +21,7 @@ describe 'syslogng::destination' do
     let(:title) { 'messages' }
     let(:params) do
       {
-	:ensure => 'absent',
+        :ensure => 'absent',
       }
     end
     it {
