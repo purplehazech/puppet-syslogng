@@ -15,7 +15,7 @@ describe 'syslogng::destination::syslog' do
           :content => /^destination d_syslog_remote-server-hostname.*$/,
         }
       )
-      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/service.d/00_syslog_syslog-ng.conf").with(
+      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/log.d/00_syslog_syslog-ng.conf").with(
         {
           :ensure  => 'file',
           :content => /^log \{ source\(s_log\); filter\(f_syslog-ng\); destination\(d_syslog_remote-server-hostname\); \};/,
@@ -31,7 +31,7 @@ describe 'syslogng::destination::syslog' do
       }
     end
     it {
-      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/service.d/20_syslog_syslog-ng.conf")
+      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/log.d/20_syslog_syslog-ng.conf")
     }
   end
 end
