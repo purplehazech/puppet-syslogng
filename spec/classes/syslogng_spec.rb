@@ -141,7 +141,7 @@ describe 'syslogng' do
   end
   context "check for default options" do
     it {
-      should contain_file('/etc/syslog-ng/syslog-ng.conf.d/option.d/default.conf').with_content(/.*options {.*/);
+      should contain_file('/etc/syslog-ng/syslog-ng.conf.d/option.d/default.conf').with_content(/.*options \{.*/);
       should contain_file('/etc/syslog-ng/syslog-ng.conf.d/option.d/default.conf').with_content(/.*chain_hostnames\(no\);.*/);
       should contain_file('/etc/syslog-ng/syslog-ng.conf.d/option.d/default.conf').with_content(/.*flush_lines\(0\);.*/);
       should contain_file('/etc/syslog-ng/syslog-ng.conf.d/option.d/default.conf').with_content(/.*log_fifo_size\(1000\);.*/);
