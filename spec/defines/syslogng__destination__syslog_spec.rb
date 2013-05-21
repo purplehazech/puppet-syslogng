@@ -59,4 +59,30 @@ describe 'syslogng::destination::syslog' do
       )
     }
   end
+  context "support tls transport" do
+    let(:title) { 'remote-server-hostname' }
+    let(:params) do 
+      {
+        :transport => 'tls'
+      }
+    end
+    it {
+      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/destination.d/syslog_remote-server-hostname.conf").with(
+        {
+	  :content => /^.*transport\("tls"\).*$/
+	}
+      )
+    }
+  end
+  context "fail invalid transport" do
+    let(:title) { 'remote-server-hostname' }
+    let(:params) do 
+      {
+        :transport => 'ppp'
+      }
+    end
+    it {
+      expect { should contain_file("/etc/syslog-ng/syslog-ng.conf.d/destination.d/syslog_remote-server-hostname.conf") }.to raise_error Puppet::Error
+    }
+  end
 end
