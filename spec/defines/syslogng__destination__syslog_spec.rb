@@ -12,7 +12,7 @@ describe 'syslogng::destination::syslog' do
       should contain_file("/etc/syslog-ng/syslog-ng.conf.d/destination.d/syslog_remote-server-hostname.conf").with(
         {
           :ensure  => 'file',
-          :content => /^.*destination d_syslog_remote-server-hostname.*.*transport\("tcp"\).*$/,
+          :content => /.*destination d_syslog_remote-server-hostname.*.*transport\("tcp"\).*/m,
         }
       )
       should contain_file("/etc/syslog-ng/syslog-ng.conf.d/log.d/00_syslog_syslog-ng.conf").with(
