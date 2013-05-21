@@ -4,5 +4,24 @@ destination d_syslog_<%= @title %> {
   syslog( "<%= @title %>"
     transport("<%= @transport %>")
     port(<%= @real_port %>)
+    <%- if @no_multi_line == true   %>flags(no-multi-line)<%- end %>
+    <%- if @flush_lines             %>flush_lines(<%=     @flush_lines %>)<%0 end %>
+    <%- if @flush_timeout           %>flush_timeout(<%=   @flush_timeout %>)<%- end %>
+    <%- if @frac_digits             %>frac_digits(<%=     @frac_digits %>)<%- end %>
+    <%- if @ip_tos                  %>ip_tos(<%=          @ip_tos %>)<%- end %>
+    <%- if @ip_ttl                  %>ip_ttl(<%=          @ip_ttl %>)<%- end %>
+    <%- if @keep_alive == false     %>keep-alive(<%=      'no' %>)<%- end %>
+    <%- if @localip                 %>localip("<%=        @localip %>")<%- end %>
+    <%- if @localport               %>localport(<%=       @localport %>)<%- end %>
+    <%- if @log_fifo_size           %>log_fifo_size(<%=   @log_fifo_size %>)<%- end %>
+    <%- if @so_broadcast == true    %>so_broadcast(<%=    'yes' %>)<%- end %>
+    <%- if @so_keepalive == true    %>so_keepalive(<%=    'yes' %>)<%- end %>
+    <%- if @so_rcvbuf               %>so_rcvbuf(<%=       @so_rcvbuf %>)<%- end %>
+    <%- if @so_sndbuf               %>so_sndbuf(<%=       @so_sndbuf %>)<%- end %>
+    <%- if @spoof_source == true    %>spoof_source(<%=    'yes' %>)<%- end %>
+    <%- if @suppress                %>suppress(<%=        @suppress %>)<%- end %>
+    <%- if @template                %>template("<%=       @template %>")<%- end %>
+    <%- if @template_escape == true %>template_escape(<%= 'yes' %>)<%- end %>
+    <%- if @throttle                %>throttle(<%=        @throttle %>)<%- end %>
   );
 };
