@@ -1,0 +1,3 @@
+# Remote log for <%= @title %>
+
+log { source(s_log); filter(f_<%= @title %>); destination(d_syslog_<%= @destination %>); };
