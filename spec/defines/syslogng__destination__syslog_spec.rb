@@ -54,7 +54,7 @@ describe 'syslogng::destination::syslog' do
     it {
       should contain_file("/etc/syslog-ng/syslog-ng.conf.d/destination.d/syslog_remote-server-hostname.conf").with(
         {
-	  :content => /^.*transport\("udp"\).*$/
+	  :content => /.*transport\("udp"\).*port\(514\).*/m
 	}
       )
     }
@@ -69,7 +69,7 @@ describe 'syslogng::destination::syslog' do
     it {
       should contain_file("/etc/syslog-ng/syslog-ng.conf.d/destination.d/syslog_remote-server-hostname.conf").with(
         {
-	  :content => /^.*transport\("tls"\).*$/
+	  :content => /.*transport\("tls"\).*port\(6514\).*/m
 	}
       )
     }
@@ -83,6 +83,19 @@ describe 'syslogng::destination::syslog' do
     end
     it {
       expect { should contain_file("/etc/syslog-ng/syslog-ng.conf.d/destination.d/syslog_remote-server-hostname.conf") }.to raise_error Puppet::Error
+    }
+  end
+  context "default tcp port" do
+    let(:title) { 'remote-server-hostname' }
+    let(:params) do
+      {
+        :transport => 'tcp'
+      }
+    end
+    it {
+      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/destination.d/syslog_remote-server-hostname.conf").with_content(
+        /^.*port\(601\).*$/
+      )
     }
   end
 end
