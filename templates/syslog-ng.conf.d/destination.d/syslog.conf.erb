@@ -3,5 +3,6 @@
 destination d_syslog_<%= @title %> {
   syslog( "<%= @title %>"
     transport("<%= @transport %>")
+    port(<%= @real_port %>)
   );
 };

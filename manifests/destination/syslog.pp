@@ -16,7 +16,16 @@ define syslogng::destination::syslog (
 
   $ensure_file = $ensure ? {
     present => file,
-    default => $ensure
+    default => $ensure,
+  }
+
+  $real_port = $port ? {
+    undef   => $transport ? {
+      'udp'   => 514,
+      'tls'   => 6514,
+      default => 601,
+    },
+    default => $port,
   }
 
   file { "${conf_dir}/syslog-ng.conf.d/destination.d/syslog_${title}.conf":
