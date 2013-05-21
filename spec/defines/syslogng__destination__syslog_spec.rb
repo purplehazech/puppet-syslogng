@@ -111,7 +111,7 @@ describe 'syslogng::destination::syslog' do
 	:ip_ttl          => 1,
 	:keep_alive      => false,
 	:localip         => "1.1.1.1",
-	:locapport       => 1234,
+	:localport       => 1234,
 	:log_fifo_size   => 128,
 	:so_broadcast    => true,
 	:so_keepalive    => true,
@@ -126,7 +126,7 @@ describe 'syslogng::destination::syslog' do
     end
     it {
       should contain_file("/etc/syslog-ng/syslog-ng.conf.d/destination.d/syslog_remote-server-hostname.conf").with_content(
-        /.*port\(123\).*flags\(no-multi-line\).*flush_line\(10\).*flush_timeout\(20\).*frac_digits\(5\).*ip_tos\(11\).*ip_ttl\(1\).*keep-alive\(no\).*localip\("1.1.1.1"\).*localport\(1234\).*log_fifo_size\(128\).*so_braodcast\(yes\).*so_keepalive\(yes\).*so_rcvbuf\(256\).*so_sndbuf\(1024\).*spoof_source\(yes\).*suppress\(12\).*template\("my-template"\).*template_escape\(yes\).*throttle\(13\).*/m
+        /.*port\(123\).*flags\(no-multi-line\).*flush_lines\(10\).*flush_timeout\(20\).*frac_digits\(5\).*ip_tos\(11\).*ip_ttl\(1\).*keep-alive\(no\).*localip\("1.1.1.1"\).*localport\(1234\).*log_fifo_size\(128\).*so_broadcast\(yes\).*so_keepalive\(yes\).*so_rcvbuf\(256\).*so_sndbuf\(1024\).*spoof_source\(yes\).*suppress\(12\).*template\("my-template"\).*template_escape\(yes\).*throttle\(13\).*/m
       )
     }
   end
