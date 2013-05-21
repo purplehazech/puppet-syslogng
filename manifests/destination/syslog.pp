@@ -8,7 +8,8 @@ define syslogng::destination::syslog (
     'syslog-ng' => {},
   },
   $priority  = 00,
-  $transport = 'tcp'
+  $transport = 'tcp',
+  $port      = undef
 ) {
   validate_re($ensure, ['^present$', '^absent$'])
   validate_absolute_path($conf_dir)
@@ -28,9 +29,10 @@ define syslogng::destination::syslog (
     default => $port,
   }
 
+  $template_base = 'syslogng/syslog-ng.conf.d'
   file { "${conf_dir}/syslog-ng.conf.d/destination.d/syslog_${title}.conf":
     ensure  => $ensure_file,
-    content => template("syslogng/syslog-ng.conf.d/destination.d/syslog.conf.erb"),
+    content => template("${template_base}/destination.d/syslog.conf.erb")
   }
 
   create_resources(syslogng::destination::syslog::service, $services, {
