@@ -12,7 +12,7 @@ describe 'syslogng::destination::syslog' do
       should contain_file("/etc/syslog-ng/syslog-ng.conf.d/destination.d/syslog_remote-server-hostname.conf").with(
         {
           :ensure  => 'file',
-          :content => /^.*destination d_syslog_remote-server-hostname.*$/,
+          :content => /^.*destination d_syslog_remote-server-hostname.*.*transport\("tcp"\).*$/,
         }
       )
       should contain_file("/etc/syslog-ng/syslog-ng.conf.d/log.d/00_syslog_syslog-ng.conf").with(
@@ -40,6 +40,21 @@ describe 'syslogng::destination::syslog' do
       should contain_file("/etc/syslog-ng/syslog-ng.conf.d/destination.d/syslog_remote-server-hostname.conf").with(
         {
 	  :content => /^.*syslog\( "remote-server-hostname".*$/
+	}
+      )
+    }
+  end
+  context "support udp transport" do
+    let(:title) { 'remote-server-hostname' }
+    let(:params) do 
+      {
+        :transport => 'udp'
+      }
+    end
+    it {
+      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/destination.d/syslog_remote-server-hostname.conf").with(
+        {
+	  :content => /^.*transport\("udp"\).*$/
 	}
       )
     }
