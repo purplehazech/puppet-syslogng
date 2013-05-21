@@ -7,8 +7,7 @@ define syslogng::destination::syslog (
   $services = {
     'syslog-ng' => {},
   },
-  $priority = 00,
-  $host     = undef
+  $priority = 00
 ) {
   validate_re($ensure, ['^present$', '^absent$'])
   validate_absolute_path($conf_dir)
