@@ -34,4 +34,14 @@ describe 'syslogng::destination::syslog' do
       should contain_file("/etc/syslog-ng/syslog-ng.conf.d/log.d/20_syslog_syslog-ng.conf")
     }
   end
+  context "hostname in conf file" do
+    let(:title) { 'remote-server-hostname' }
+    it {
+      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/destination.d/syslog_remote-server-hostname.conf").with(
+        {
+	  :content => /^.*syslog \( "remote-server-hostname".*$/
+	}
+      )
+    }
+  end
 end
