@@ -39,7 +39,7 @@ describe 'syslogng::destination::syslog' do
     it {
       should contain_file("/etc/syslog-ng/syslog-ng.conf.d/destination.d/syslog_remote-server-hostname.conf").with(
         {
-	  :content => /^.*syslog \( "remote-server-hostname".*$/
+	  :content => /^.*syslog\( "remote-server-hostname".*$/
 	}
       )
     }
