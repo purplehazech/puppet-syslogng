@@ -11,7 +11,7 @@ define syslogng::destination::syslog::service (
 
   $ensure_file = $ensure ? {
     present => file,
-    default => $ensure
+    default => $ensure,
   }
 
   file { "${conf_dir}/syslog-ng.conf.d/log.d/${priority}_syslog_${title}.conf":

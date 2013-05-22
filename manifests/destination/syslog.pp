@@ -3,6 +3,7 @@
 #
 define syslogng::destination::syslog (
   $ensure          = present,
+  $type            = 'syslog',
   $conf_dir        = '/etc/syslog-ng',
   $services        = {
     'syslog-ng' => {},

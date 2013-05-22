@@ -172,6 +172,7 @@ class syslogng (
     ensure   => $ensure,
     conf_dir => $conf_dir,
     notify   => Service['syslog-ng'],
+    options  => $destinations,
   })
 
 }
