@@ -270,4 +270,14 @@ describe 'syslogng' do
       should contain_syslogng__source('kernel').with({:ensure => 'absent'})
     }
   end
+  context "syslog destination from destination param via type hint" do
+    let(:params) do
+      {
+        :destinations => { "remote-server-hostname" => { "type" => "syslog" } }
+      }
+    end
+    it {
+      should contain_syslogng__destination__syslog('remote-server-hostname')
+    }
+  end
 end
