@@ -9,10 +9,10 @@ describe 'syslogng::service' do
       }
     end
     it {
-      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/service.d/syslog-ng.conf").with(
+      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/log.d/syslog-ng.conf").with(
         {
 	  :ensure => 'file',
-	  :source => 'puppet:///modules/syslogng/scl/syslog-ng.conf.d/service.d/syslog-ng.conf'
+	  :source => 'puppet:///modules/syslogng/scl/syslog-ng.conf.d/log.d/syslog-ng.conf'
 	}
       )
     }

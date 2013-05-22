@@ -39,8 +39,8 @@ describe 'syslogng::destination::syslog' do
     it {
       should contain_file("/etc/syslog-ng/syslog-ng.conf.d/destination.d/syslog_remote-server-hostname.conf").with(
         {
-	  :content => /^.*syslog\( "remote-server-hostname".*$/
-	}
+          :content => /^.*syslog\( "remote-server-hostname".*$/
+        }
       )
     }
   end
@@ -54,8 +54,8 @@ describe 'syslogng::destination::syslog' do
     it {
       should contain_file("/etc/syslog-ng/syslog-ng.conf.d/destination.d/syslog_remote-server-hostname.conf").with(
         {
-	  :content => /.*transport\("udp"\).*port\(514\).*/m
-	}
+          :content => /.*transport\("udp"\).*port\(514\).*/m
+        }
       )
     }
   end
@@ -69,8 +69,8 @@ describe 'syslogng::destination::syslog' do
     it {
       should contain_file("/etc/syslog-ng/syslog-ng.conf.d/destination.d/syslog_remote-server-hostname.conf").with(
         {
-	  :content => /.*transport\("tls"\).*port\(6514\).*/m
-	}
+          :content => /.*transport\("tls"\).*port\(6514\).*/m
+        }
       )
     }
   end
@@ -103,25 +103,25 @@ describe 'syslogng::destination::syslog' do
     let(:params) do
       {
         :port            => 123,
-	:no_multi_line   => true,
-	:flush_lines     => 10,
-	:flush_timeout   => 20,
-	:frac_digits     => 5,
-	:ip_tos          => 11,
-	:ip_ttl          => 1,
-	:keep_alive      => false,
-	:localip         => "1.1.1.1",
-	:localport       => 1234,
-	:log_fifo_size   => 128,
-	:so_broadcast    => true,
-	:so_keepalive    => true,
-	:so_rcvbuf       => 256,
-	:so_sndbuf       => 1024,
-	:spoof_source    => true,
-	:suppress        => 12,
-	:template        => "my-template",
-	:template_escape => true,
-	:throttle        => 13,
+        :no_multi_line   => true,
+        :flush_lines     => 10,
+        :flush_timeout   => 20,
+        :frac_digits     => 5,
+        :ip_tos          => 11,
+        :ip_ttl          => 1,
+        :keep_alive      => false,
+        :localip         => "1.1.1.1",
+        :localport       => 1234,
+        :log_fifo_size   => 128,
+        :so_broadcast    => true,
+        :so_keepalive    => true,
+        :so_rcvbuf       => 256,
+        :so_sndbuf       => 1024,
+        :spoof_source    => true,
+        :suppress        => 12,
+        :template        => "my-template",
+        :template_escape => true,
+        :throttle        => 13,
       }
     end
     it {
@@ -135,19 +135,19 @@ describe 'syslogng::destination::syslog' do
     let(:params) do
       {
         :transport => 'tls',
-	:tls       => {
-	  "ca_dir"       => "/ca/dir",
-	  "cert_file"    => "/cert/dir",
-	  "cipher_suite" => "sha",
-	  "crl_dir"      => "/crl/dir",
+        :tls       => {
+          "ca_dir"       => "/ca/dir",
+          "cert_file"    => "/cert/file",
+          "cipher_suite" => "sha",
+          "crl_dir"      => "/crl/dir",
           "key_file"     => "/key/file",
-	  "peer_verify"  => "optional-trusted",
-	  "trusted_dn"   => "C=CH",
-	  "trusted_keys" => [
-	    "SHA1:00:EF:ED:A4:CE:00:D1:14:A4:AB:43:00:EF:00:91:85:FF:89:28:8F",
-	    "SHA1:0C:42:00:3E:B2:60:36:64:00:E2:83:F0:80:46:AD:00:A8:9D:00:15"
-	  ]
-	}
+          "peer_verify"  => "optional-trusted",
+          "trusted_dn"   => "C=CH",
+          "trusted_keys" => [
+            "SHA1:00:EF:ED:A4:CE:00:D1:14:A4:AB:43:00:EF:00:91:85:FF:89:28:8F",
+            "SHA1:0C:42:00:3E:B2:60:36:64:00:E2:83:F0:80:46:AD:00:A8:9D:00:15"
+          ]
+        }
       }
     end
     it {
