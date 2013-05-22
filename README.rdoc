@@ -5,7 +5,7 @@
 This repository will eventually contain a complete syslog-ng setup.
 
 The idea is to use the rather complete scl configuration in the stepping-stone
-syslog-ng[https://github.com/syslog-ng] repo as a starting point and adding
+syslog-ng[https://github.com/stepping-stone/syslog-ng] repo as a starting point and adding
 templates as I go.
 
 For the scope of this module I am defining completeness as follows:
