@@ -4,7 +4,7 @@ destination d_syslog_<%= @title %> {
   syslog( "<%= @title %>"
     transport("<%= @transport %>")
     port(<%= @real_port %>)
-    <%- if @no_multi_line == true   %>flags(no-multi-line)<%- end %>
+    <%- if @no_multi_line == true   %>flags(<%=           'no-multi-line' %>)<%- end %>
     <%- if @flush_lines             %>flush_lines(<%=     @flush_lines %>)<%0 end %>
     <%- if @flush_timeout           %>flush_timeout(<%=   @flush_timeout %>)<%- end %>
     <%- if @frac_digits             %>frac_digits(<%=     @frac_digits %>)<%- end %>
