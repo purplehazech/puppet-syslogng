@@ -28,7 +28,8 @@ define syslogng::destination::syslog (
   $suppress        = undef,
   $template        = undef,
   $template_escape = undef,
-  $throttle        = undef
+  $throttle        = undef,
+  $tls             = {},
 ) {
   validate_re($ensure, ['^present$', '^absent$'])
   validate_absolute_path($conf_dir)

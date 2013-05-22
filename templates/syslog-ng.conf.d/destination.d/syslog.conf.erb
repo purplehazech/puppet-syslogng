@@ -4,24 +4,34 @@ destination d_syslog_<%= @title %> {
   syslog( "<%= @title %>"
     transport("<%= @transport %>")
     port(<%= @real_port %>)
-    <%- if @no_multi_line == true   %>flags(<%=           'no-multi-line' %>)<%- end %>
-    <%- if @flush_lines             %>flush_lines(<%=     @flush_lines %>)<%0 end %>
-    <%- if @flush_timeout           %>flush_timeout(<%=   @flush_timeout %>)<%- end %>
-    <%- if @frac_digits             %>frac_digits(<%=     @frac_digits %>)<%- end %>
-    <%- if @ip_tos                  %>ip_tos(<%=          @ip_tos %>)<%- end %>
-    <%- if @ip_ttl                  %>ip_ttl(<%=          @ip_ttl %>)<%- end %>
-    <%- if @keep_alive == false     %>keep-alive(<%=      'no' %>)<%- end %>
-    <%- if @localip                 %>localip("<%=        @localip %>")<%- end %>
-    <%- if @localport               %>localport(<%=       @localport %>)<%- end %>
-    <%- if @log_fifo_size           %>log_fifo_size(<%=   @log_fifo_size %>)<%- end %>
-    <%- if @so_broadcast == true    %>so_broadcast(<%=    'yes' %>)<%- end %>
-    <%- if @so_keepalive == true    %>so_keepalive(<%=    'yes' %>)<%- end %>
-    <%- if @so_rcvbuf               %>so_rcvbuf(<%=       @so_rcvbuf %>)<%- end %>
-    <%- if @so_sndbuf               %>so_sndbuf(<%=       @so_sndbuf %>)<%- end %>
-    <%- if @spoof_source == true    %>spoof_source(<%=    'yes' %>)<%- end %>
-    <%- if @suppress                %>suppress(<%=        @suppress %>)<%- end %>
-    <%- if @template                %>template("<%=       @template %>")<%- end %>
-    <%- if @template_escape == true %>template_escape(<%= 'yes' %>)<%- end %>
-    <%- if @throttle                %>throttle(<%=        @throttle %>)<%- end %>
+    <%- if @no_multi_line == true   %>flags(<%=           'no-multi-line' %>) <%- end -%>
+    <%- if @flush_lines             %>flush_lines(<%=     @flush_lines %>) <%- end -%>
+    <%- if @flush_timeout           %>flush_timeout(<%=   @flush_timeout %>) <%- end -%>
+    <%- if @frac_digits             %>frac_digits(<%=     @frac_digits %>) <%- end -%>
+    <%- if @ip_tos                  %>ip_tos(<%=          @ip_tos %>) <%- end -%>
+    <%- if @ip_ttl                  %>ip_ttl(<%=          @ip_ttl %>) <%- end -%>
+    <%- if @keep_alive == false     %>keep-alive(<%=      'no' %>) <%- end -%>
+    <%- if @localip                 %>localip("<%=        @localip %>") <%- end -%>
+    <%- if @localport               %>localport(<%=       @localport %>) <%- end -%>
+    <%- if @log_fifo_size           %>log_fifo_size(<%=   @log_fifo_size %>) <%- end -%>
+    <%- if @so_broadcast == true    %>so_broadcast(<%=    'yes' %>) <%- end -%>
+    <%- if @so_keepalive == true    %>so_keepalive(<%=    'yes' %>) <%- end -%>
+    <%- if @so_rcvbuf               %>so_rcvbuf(<%=       @so_rcvbuf %>) <%- end -%>
+    <%- if @so_sndbuf               %>so_sndbuf(<%=       @so_sndbuf %>) <%- end -%>
+    <%- if @spoof_source == true    %>spoof_source(<%=    'yes' %>) <%- end -%>
+    <%- if @suppress                %>suppress(<%=        @suppress %>) <%- end -%>
+    <%- if @template                %>template("<%=       @template %>") <%- end -%>
+    <%- if @template_escape == true %>template_escape(<%= 'yes' %>) <%- end -%>
+    <%- if @throttle                %>throttle(<%=        @throttle %>) <%- end -%>
+    <%- if @transport == "tls"      %>tls(
+     <%- if @tls["ca_dir"]          %>ca_dir("<%=         @tls["ca_dir"] %>") <%- end -%>
+     <%- if @tls["cert_file"]       %>cert_file("<%=      @tls["cert_file"] %>") <%- end -%>
+     <%- if @tls["cipher_suite"]    %>cipher_suite(<%=    @tls["cipher_suite"] %>) <%- end -%>
+     <%- if @tls["crl_dir"]         %>crl_dir("<%=        @tls["crl_dir"] %>") <%- end -%>
+     <%- if @tls["key_file"]        %>key_file("<%=       @tls["key_file"] %>") <%- end -%>
+     <%- if @tls["peer_verify"]     %>peer_verify(<%=     @tls["peer_verify"] %>) <%- end -%>
+     <%- if @tls["trusted_dn"]      %>trusted_dn("<%=     @tls["trusted_dn"] %>") <%- end -%>
+     <%- if @tls["trusted_keys"]    %>trusted_keys(<%=    '"' + @tls["trusted_keys"].join('", "') + '"' %>) <%- end -%>
+    <%- end %>
   );
 };
