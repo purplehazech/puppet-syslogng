@@ -95,6 +95,22 @@ conscious design decision not to implement that.
 The proper way to do all this would be from an external node classifier. A smart api
 for module developers who would like to integrate with this module is in the works.
 
+=== Advanced Examples
+
+Multiple remote destinations via syslog protocol. Note that the destinations and their 
+services need unique names.
+
+  class { 'syslogng':
+    ensure => present,
+    services => {
+     'syslog-ng' => {},
+    },
+    destinations => {
+      'remote-host-a' => { type => 'syslog', 'services' => { 'syslog-ng-a' => { 'service' => 'syslog-ng' } } },
+      'remote-host-b' => { type => 'syslog', 'services' => { 'syslog-ng-b' => { 'service' => 'syslog-ng' } } },
+    }
+  }
+
 === License
 
 2012, Lucas S. Bickel, Alle Rechte vorbehalten

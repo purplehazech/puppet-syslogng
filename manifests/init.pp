@@ -168,11 +168,14 @@ class syslogng (
     notify   => Service['syslog-ng'],
   })
 
-  create_resources(syslogng::destination, $destinations, {
+  $default_destination = {
     ensure   => $ensure,
     conf_dir => $conf_dir,
     notify   => Service['syslog-ng'],
-    options  => $destinations,
-  })
+    type     => file,
+  }
+
+  create_resources(syslogng::destination, $destinations, $default_destination)
+  create_resources(syslogng::destination::syslog, $destinations, $default_destination)
 
 }
