@@ -49,18 +49,25 @@ define syslogng::destination::syslog (
     },
     default => $port,
   }
-
   $template_base = 'syslogng/syslog-ng.conf.d'
-  file { "${conf_dir}/syslog-ng.conf.d/destination.d/syslog_${title}.conf":
-    ensure  => $ensure_file,
-    content => template("${template_base}/destination.d/syslog.conf.erb")
-  }
 
-  create_resources(syslogng::destination::syslog::service, $services, {
-    ensure   => $ensure,
-    conf_dir => $conf_dir,
-    priority => $priority,
-    destination => $title,
-  })
+  case $type {
+    'syslog': {
+      file { "${conf_dir}/syslog-ng.conf.d/destination.d/syslog_${title}.conf":
+        ensure  => $ensure_file,
+        content => template("${template_base}/destination.d/syslog.conf.erb")
+      }
+
+      create_resources(syslogng::destination::syslog::service, $services, {
+        ensure      => $ensure,
+        conf_dir    => $conf_dir,
+        priority    => $priority,
+        destination => $title,
+      })
+    }
+    default: {
+      # noop
+    }
+  }
 
 }
