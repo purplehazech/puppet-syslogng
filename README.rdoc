@@ -6,13 +6,13 @@ This repository will eventually contain a complete syslog-ng setup.
 
 The idea is to use the rather complete scl configuration in the stepping-stone
 syslog-ng[https://github.com/syslog-ng] repo as a starting point and adding
-templates as i go.
+templates as I go.
 
 For the scope of this module I am defining completeness as follows:
 
 * manage installation of syslog-ng package, done
 * built in support for a lot of logs, done
-* manage client/server setup with storeconfigs
+* manage source/destination setup with storeconfigs
 * good documentation
 
 === Usage
@@ -23,7 +23,8 @@ syslog-ng configuration.
   class { 'syslogng': }
 
 Let's say you need to monitor some services. You can use the create_resources api
-to specify the services you need.
+to specify the services you need. Services usually consist of a log entry and its
+needed filters and destinations.
 
   class { 'syslogng':
     services => {
