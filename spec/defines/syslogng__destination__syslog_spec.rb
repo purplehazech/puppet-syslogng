@@ -130,4 +130,30 @@ describe 'syslogng::destination::syslog' do
       )
     }
   end
+  context "complete tls configuration" do
+    let(:title) { 'remote-server-hostname' }
+    let(:params) do
+      {
+        :transport => 'tls',
+	:tls       => {
+	  "ca_dir"       => "/ca/dir",
+	  "cert_file"    => "/cert/dir",
+	  "cipher_suite" => "sha",
+	  "crl_dir"      => "/crl/dir",
+          "key_file"     => "/key/file",
+	  "peer_verify"  => "optional-trusted",
+	  "trusted_dn"   => "C=CH",
+	  "trusted_keys" => [
+	    "SHA1:00:EF:ED:A4:CE:00:D1:14:A4:AB:43:00:EF:00:91:85:FF:89:28:8F",
+	    "SHA1:0C:42:00:3E:B2:60:36:64:00:E2:83:F0:80:46:AD:00:A8:9D:00:15"
+	  ]
+	}
+      }
+    end
+    it {
+      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/destination.d/syslog_remote-server-hostname.conf").with_content(
+        /.*transport\("tls"\).*tls\(.*ca_dir\("\/ca\/dir"\).*cert_file\("\/cert\/file"\).*cipher_suite\(sha\).*crl_dir\("\/crl\/dir"\).*key_file\("\/key\/file"\).*peer_verify\(optional-trusted\).*trusted_dn\("C=CH"\).*trusted_keys\("SHA1:00:EF:ED:A4:CE:00:D1:14:A4:AB:43:00:EF:00:91:85:FF:89:28:8F", "SHA1:0C:42:00:3E:B2:60:36:64:00:E2:83:F0:80:46:AD:00:A8:9D:00:15"\).*\).*/m
+      )
+    }
+  end
 end
