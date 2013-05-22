@@ -8,7 +8,7 @@
 # fastest configuration possibility. If you need more flexibility you
 # will probably want to start replacing some modules from the bundle
 # with dedicated syslogng::source, syslogng::destination and other
-# resources. 
+# resources.
 #
 # As long as you are happy to keep the default file logs in /var/log
 # you should be able to add quite some services before that while

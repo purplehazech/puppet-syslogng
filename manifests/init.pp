@@ -175,7 +175,16 @@ class syslogng (
     type     => file,
   }
 
-  create_resources(syslogng::destination, $destinations, $default_destination)
-  create_resources(syslogng::destination::syslog, $destinations, $default_destination)
+  create_resources(
+    syslogng::destination,
+    $destinations,
+    $default_destination
+  )
+
+  create_resources(
+    syslogng::destination::syslog,
+    $destinations,
+    $default_destination
+  )
 
 }

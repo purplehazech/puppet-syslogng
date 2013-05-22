@@ -10,7 +10,8 @@
 # [*conf_dir*]
 #  configuration parent dir. Default: /etc/syslog-ng
 # [*type*]
-#  type of destination to create, currently file and syslog are supported. Default: file
+#  type of destination to create, currently file and syslog are supported.
+#  Default: file
 # [*options*]
 #  The full hash of destinations as passed to the syslogng class
 #
