@@ -12,14 +12,36 @@
 # [*type*]
 #  type of destination to create, currently file and syslog are supported.
 #  Default: file
-# [*options*]
-#  The full hash of destinations as passed to the syslogng class
-#
+
 define syslogng::destination (
   $ensure   = present,
   $conf_dir = '/etc/syslog-ng',
   $type     = file,
-  $services = {},
+  $services = {}, 
+  # options below this are for compat with other modules
+  $priority        = undef,
+  $transport       = undef,
+  $port            = undef,
+  $no_multi_line   = undef,
+  $flush_lines     = undef,
+  $flush_timeout   = undef,
+  $frac_digits     = undef,
+  $ip_tos          = undef,
+  $ip_ttl          = undef,
+  $keep_alive      = undef,
+  $localip         = undef,
+  $localport       = undef,
+  $log_fifo_size   = undef,
+  $so_broadcast    = undef,
+  $so_keepalive    = undef,
+  $so_rcvbuf       = undef,
+  $so_sndbuf       = undef,
+  $spoof_source    = undef,
+  $suppress        = undef,
+  $template        = undef,
+  $template_escape = undef,
+  $throttle        = undef,
+  $tls             = undef,
 ) {
   validate_re($ensure, [ '^present', '^absent' ])
   validate_absolute_path($conf_dir)
