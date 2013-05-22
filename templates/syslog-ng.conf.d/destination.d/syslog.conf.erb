@@ -32,6 +32,7 @@ destination d_syslog_<%= @title %> {
      <%- if @tls["peer_verify"]     %>peer_verify(<%=     @tls["peer_verify"] %>) <%- end -%>
      <%- if @tls["trusted_dn"]      %>trusted_dn("<%=     @tls["trusted_dn"] %>") <%- end -%>
      <%- if @tls["trusted_keys"]    %>trusted_keys(<%=    '"' + @tls["trusted_keys"].join('", "') + '"' %>) <%- end -%>
+     )
     <%- end %>
   );
 };
