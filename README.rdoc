@@ -98,7 +98,8 @@ for module developers who would like to integrate with this module is in the wor
 === Advanced Examples
 
 Multiple remote destinations via syslog protocol. Note that the destinations and their 
-services need unique names.
+services need unique names. For the destinations their name is also the hostname or
+ip of the remote syslog server.
 
   class { 'syslogng':
     ensure => present,
