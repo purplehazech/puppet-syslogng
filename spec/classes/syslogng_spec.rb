@@ -73,7 +73,6 @@ describe 'syslogng' do
       should contain_file('/etc/syslog-ng/syslog-ng.conf.d/source.d').with({:ensure => 'directory'})
       should contain_file('/etc/syslog-ng/syslog-ng.conf.d/log.d').with({:ensure => 'directory'})
       should contain_file('/etc/syslog-ng/syslog-ng.conf.d/option.d').with({:ensure => 'directory'})
-      should contain_file('/etc/syslog-ng/syslog-ng.conf.d/service.d').with({:ensure => 'directory'})
     }
   end
   context "remove config dirs" do
@@ -90,7 +89,6 @@ describe 'syslogng' do
       should contain_file('/etc/syslog-ng/syslog-ng.conf.d/source.d').with({:ensure => 'absent'})
       should contain_file('/etc/syslog-ng/syslog-ng.conf.d/log.d').with({:ensure => 'absent'})
       should contain_file('/etc/syslog-ng/syslog-ng.conf.d/option.d').with({:ensure => 'absent'})
-      should contain_file('/etc/syslog-ng/syslog-ng.conf.d/service.d').with({:ensure => 'absent'})
     }
   end
   context "start and ensure service" do
@@ -126,7 +124,6 @@ describe 'syslogng' do
       should contain_file('/my/conf/dir/syslog-ng.conf.d/source.d')
       should contain_file('/my/conf/dir/syslog-ng.conf.d/log.d')
       should contain_file('/my/conf/dir/syslog-ng.conf.d/option.d')
-      should contain_file('/my/conf/dir/syslog-ng.conf.d/service.d')
     }
   end
   context "check for invalid conf dirs" do

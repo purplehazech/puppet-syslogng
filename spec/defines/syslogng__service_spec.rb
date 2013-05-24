@@ -9,10 +9,22 @@ describe 'syslogng::service' do
       }
     end
     it {
-      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/service.d/syslog-ng.conf").with(
+      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/destination.d/syslog-ng.conf").with(
         {
           :ensure => 'file',
-          :source => 'puppet:///modules/syslogng/scl/syslog-ng.conf.d/service.d/syslog-ng.conf'
+          :source => 'puppet:///modules/syslogng/scl/syslog-ng.conf.d/destination.d/syslog-ng.conf'
+        }
+      )
+      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/filter.d/syslog-ng.conf").with(
+        {
+          :ensure => 'file',
+          :source => 'puppet:///modules/syslogng/scl/syslog-ng.conf.d/filter.d/syslog-ng.conf'
+        }
+      )
+      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/log.d/90_syslog-ng.conf").with(
+        {
+          :ensure => 'file',
+          :source => 'puppet:///modules/syslogng/scl/syslog-ng.conf.d/log.d/90_syslog-ng.conf'
         }
       )
     }
@@ -25,7 +37,9 @@ describe 'syslogng::service' do
       }
     end
     it {
-      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/service.d/syslog-ng.conf").with({:ensure => 'absent'})
+      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/destination.d/syslog-ng.conf").with({:ensure => 'absent'})
+      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/filter.d/syslog-ng.conf").with({:ensure => 'absent'})
+      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/log.d/90_syslog-ng.conf").with({:ensure => 'absent'})
     }
   end
 end
