@@ -98,9 +98,10 @@ for module developers who would like to integrate with this module is in the wor
 
 === Advanced Examples
 
-Multiple remote destinations via syslog protocol. Note that the destinations and their 
-services need unique names. For the destinations their name is also the hostname or
-ip of the remote syslog server.
+==== Log to multiple remote destinations via the syslog protocol.
+
+Note that the destinations and their services need unique names. For the destinations 
+their name is also the hostname or ip of the remote syslog server.
 
   class { 'syslogng':
     ensure => present,
@@ -126,6 +127,25 @@ ip of the remote syslog server.
       }
     }
   }
+
+With this setup Messages from the syslog-ng service will be logged to both servers as 
+well as to the local file system.
+
+=== Developers
+
+Pull Requests, Issues and other Feedback are very welcome!
+
+Please submit proper pull requests and be prepared to get nagged if you don't write spec
+first. Travis will run the tests for you and indicate their results in the pull request.
+
+I accept pull requests containing only spec. If you found some exotic use case that work 
+nicely on your infrastructure please consider documenting it in a spec case so future 
+updates of this module don't introduce breakage.
+
+The follwing commands come in handy when hacking with this module.
+
+  rake lint
+  rake spec
 
 === License
 
