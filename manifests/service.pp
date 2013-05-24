@@ -42,7 +42,7 @@ define syslogng::service (
     default => $ensure
   }
 
-  file { 
+  file {
     "${conf_dir}/syslog-ng.conf.d/destination.d/${title}.conf":
       ensure => $ensure_file,
       source => "puppet:///modules/syslogng/scl/syslog-ng.conf.d/destination.d/${title}.conf";
