@@ -142,7 +142,7 @@ I accept pull requests containing only spec. If you found some exotic use case t
 nicely on your infrastructure please consider documenting it in a spec case so future 
 updates of this module don't introduce breakage.
 
-The follwing commands come in handy when hacking with this module.
+The following commands come in handy when hacking with this module.
 
   rake lint
   rake spec
