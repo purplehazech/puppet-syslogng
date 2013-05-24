@@ -42,8 +42,15 @@ define syslogng::service (
     default => $ensure
   }
 
-  file { "${conf_dir}/syslog-ng.conf.d/service.d/${title}.conf":
-    ensure => $ensure_file,
-    source => "puppet:///modules/syslogng/scl/syslog-ng.conf.d/service.d/${title}.conf"
+  file { 
+    "${conf_dir}/syslog-ng.conf.d/destination.d/${title}.conf":
+      ensure => $ensure_file,
+      source => "puppet:///modules/syslogng/scl/syslog-ng.conf.d/destination.d/${title}.conf";
+    "${conf_dir}/syslog-ng.conf.d/filter.d/${title}.conf":
+      ensure => $ensure_file,
+      source => "puppet:///modules/syslogng/scl/syslog-ng.conf.d/filter.d/${title}.conf";
+    "${conf_dir}/syslog-ng.conf.d/log.d/90_${title}.conf":
+      ensure => $ensure_file,
+      source => "puppet:///modules/syslogng/scl/syslog-ng.conf.d/log.d/90_${title}.conf";
   }
 }
