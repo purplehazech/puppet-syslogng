@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'syslogng::service' do
+describe 'syslogng::logpath' do
   context "callable with params" do
     let(:title) { 'syslog-ng' }
     let(:params) do

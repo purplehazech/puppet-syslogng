@@ -229,20 +229,20 @@ describe 'syslogng' do
       should contain_syslogng__source('kernel').with({:ensure => 'present'})
     }
   end
-  context "define syslog-ng service" do
+  context "define syslog-ng logpath" do
     it {
-      should contain_syslogng__service('syslog-ng').with({:ensure => 'present'})
+      should contain_syslogng__logpath('syslog-ng').with({:ensure => 'present'})
     }
   end
-  context "service config from param" do
+  context "logpath config from param" do
     let(:params) do
       {
-        :services => { "syslog-ng" => {}, "radius" => {} }
+        :logpaths => { "syslog-ng" => {}, "radius" => {} }
       }
     end
     it {
-      should contain_syslogng__service('syslog-ng').with({:ensure => 'present'})
-      should contain_syslogng__service('radius').with({:ensure => 'present'})
+      should contain_syslogng__logpath('syslog-ng').with({:ensure => 'present'})
+      should contain_syslogng__logpath('radius').with({:ensure => 'present'})
     }
   end
   context "destination config from param" do
