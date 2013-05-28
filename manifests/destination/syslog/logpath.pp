@@ -1,12 +1,12 @@
-# == Define: syslogng::destination::syslog::service
+# == Define: syslogng::destination::syslog::logpath
 #
 #
-define syslogng::destination::syslog::service (
+define syslogng::destination::syslog::logpath (
   $ensure   = present,
   $conf_dir = '/etc/syslog-ng',
   $priority = 00,
   $destination = undef,
-  $service = undef,
+  $logpath = undef,
 ) {
   validate_re($ensure, ['^present$', '^absent$'])
 
@@ -15,9 +15,9 @@ define syslogng::destination::syslog::service (
     default => $ensure,
   }
 
-  $service_name = $service ? {
+  $logpath_name = $logpath ? {
     undef   => $title,
-    default => $service,
+    default => $logpath,
   }
 
   file { "${conf_dir}/syslog-ng.conf.d/log.d/${priority}_syslog_${title}.conf":

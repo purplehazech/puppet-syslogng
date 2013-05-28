@@ -5,7 +5,7 @@
 #
 # === Usages
 #
-# Sources, services and destinations are stored as files.
+# Sources, logpaths and destinations are stored as files.
 # * files/scl/syslog-ng.conf.d
 #
 # An example config using files from there looks like so.
@@ -17,7 +17,7 @@
 #       "default"   => {},
 #       "kernel"    => {},
 #     },
-#     services      => {
+#     logpaths      => {
 #       "syslog-ng" => {},
 #       "radius"    => {},
 #     },
@@ -44,10 +44,10 @@
 #     'default' => {},
 #     'kernel' => {}
 #   }
-# [*services*]
-# Hash of services to configure. Default:
+# [*logpaths*]
+# Hash of logpaths to configure. Default:
 #   { 'syslog-ng' => {} }
-# See the README for a complete list of services.
+# See the README for a complete list of logpaths.
 # [*destinations*]
 # Hash of log destinations. Default:
 #   {
@@ -72,7 +72,7 @@ class syslogng (
     'default' => {},
     'kernel'  => {},
   },
-  $services        = {
+  $logpaths        = {
     'syslog-ng' => {},
   },
   $destinations    = {
@@ -139,7 +139,6 @@ class syslogng (
       "${conf_dir}/syslog-ng.conf.d/source.d",
       "${conf_dir}/syslog-ng.conf.d/log.d",
       "${conf_dir}/syslog-ng.conf.d/option.d",
-      "${conf_dir}/syslog-ng.conf.d/service.d",
     ]:
       ensure => $ensure_directory;
     "${conf_dir}/syslog-ng.conf.d/option.d/default.conf":
@@ -162,7 +161,7 @@ class syslogng (
     notify   => Service['syslog-ng'],
   })
 
-  create_resources(syslogng::service, $services, {
+  create_resources(syslogng::logpath, $logpaths, {
     ensure   => $ensure,
     conf_dir => $conf_dir,
     notify   => Service['syslog-ng'],

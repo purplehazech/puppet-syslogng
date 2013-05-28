@@ -17,7 +17,7 @@ define syslogng::destination (
   $ensure   = present,
   $conf_dir = '/etc/syslog-ng',
   $type     = file,
-  $services = {},
+  $logpaths = {},
   # options below this are for compat with other modules
   $priority        = undef,
   $transport       = undef,

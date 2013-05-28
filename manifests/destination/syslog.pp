@@ -5,7 +5,7 @@ define syslogng::destination::syslog (
   $ensure          = present,
   $type            = 'syslog',
   $conf_dir        = '/etc/syslog-ng',
-  $services        = {
+  $logpaths        = {
     'syslog-ng' => {},
   },
   $priority        = 00,
@@ -58,7 +58,7 @@ define syslogng::destination::syslog (
         content => template("${template_base}/destination.d/syslog.conf.erb")
       }
 
-      create_resources(syslogng::destination::syslog::service, $services, {
+      create_resources(syslogng::destination::syslog::logpath, $logpaths, {
         ensure      => $ensure,
         conf_dir    => $conf_dir,
         priority    => $priority,

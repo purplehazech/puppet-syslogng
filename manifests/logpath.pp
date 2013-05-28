@@ -1,8 +1,8 @@
-# == Define: syslogng::service
+# == Define: syslogng::logpath
 #
-# Create a syslog-ng service configuration. This define takes care of
-# installing a bundled service definition consisting of a filter, log
-# and destination configuration for a given program or service.
+# Create a syslog-ng logpath configuration. This define takes care of
+# installing a bundled logpath definition consisting of a filter, log
+# and destination configuration for a given program or logpath.
 #
 # Use these if you are happy with the bundled setups available for the
 # fastest configuration possibility. If you need more flexibility you
@@ -11,13 +11,13 @@
 # resources.
 #
 # As long as you are happy to keep the default file logs in /var/log
-# you should be able to add quite some services before that while
+# you should be able to add quite some logpaths before that while
 # still benefiting from the defaults.
 #
 # === Parameters
 #
 # [*ensure*]
-#  create or remove service, may be present or absent. Default: present
+#  create or remove logpath, may be present or absent. Default: present
 # [*conf_dir*]
 #  configurations parent dir. Default: /etc/syslog-ng
 #
@@ -26,11 +26,11 @@
 # Though this class is usually called through the create_resources api
 # on the main syslogng class, you may still invoke it directly like so:
 #
-#   syslogng::service { 'syslog-ng':
+#   syslogng::logpath { 'syslog-ng':
 #     ensure => present,
 #   }
 #
-define syslogng::service (
+define syslogng::logpath (
   $ensure   = present,
   $conf_dir = '/etc/syslog-ng'
 ) {
