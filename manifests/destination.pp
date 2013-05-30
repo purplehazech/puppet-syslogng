@@ -1,24 +1,31 @@
 # == Define: syslogng::destination
 #
-# Create a syslog-ng destination. This facility is used by the main syslogng
-# class to create destinations.
+# Create a default file based syslog-ng destination.
+#
+# This define is used to create parts of the default non parameterized setup.
 #
 # === Parameters
 #
 # [*ensure*]
-#  create or remove a destination, may be present or absent. Default: present
+#  Create or remove a destination, may be present or absent.
+#  Default: present
 # [*conf_dir*]
-#  configuration parent dir. Default: /etc/syslog-ng
+#  configuration parent dir.
+#  Default: /etc/syslog-ng
 # [*type*]
-#  type of destination to create, currently file and syslog are supported.
+#  Type of destination to create, currently file and syslog are supported.
 #  Default: file
-
+# [*...*]
+#  Remaining parameters are not used by this module but are replicated here to
+#  support an api that is designed looking ahead at the nice filter features in
+#  puppet 3.2.
+#
 define syslogng::destination (
   $ensure   = present,
   $conf_dir = '/etc/syslog-ng',
   $type     = file,
-  $logpaths = {},
   # options below this are for compat with other modules
+  $logpaths        = undef,
   $priority        = undef,
   $transport       = undef,
   $port            = undef,

@@ -22,21 +22,21 @@ syslog-ng configuration.
 
   class { 'syslogng': }
 
-Let's say you need to monitor some services. You can use the create_resources api
-to specify the services you need. Services usually consist of a log entry and its
+Let's say you need to monitor some logpaths. You can use the create_resources api
+to specify the logpaths you need. Services usually consist of a log entry and its
 needed filters and destinations.
 
   class { 'syslogng':
-    services => {
+    logpaths => {
       'syslog-ng' => {},
       'radius' => {},
     },
   }
 
-If you remove a service you need to do so manually.
+If you remove a logpath you need to do so manually.
 
   class { 'syslogng':
-    services => {
+    logpaths => {
       'syslog-ng' => {},
       'radius' => {
         ensure => absent,
@@ -44,10 +44,10 @@ If you remove a service you need to do so manually.
     },
   }
 
-If you want to show off all the services, you would do that like so.
+If you want to show off all the logpaths, you would do that like so.
 
   class { 'syslogng':
-    services => {
+    logpaths => {
       'syslog-ng' => {},
       'acpid' => {},
       'amavis' => {},
@@ -90,7 +90,7 @@ If you want to show off all the services, you would do that like so.
     }
   }
 
-There is no way to include all the available services automatically. It was a 
+There is no way to include all the available logpaths automatically. It was a 
 conscious design decision not to implement that.
 
 The proper way to do all this would be from an external node classifier. A smart api
@@ -100,35 +100,35 @@ for module developers who would like to integrate with this module is in the wor
 
 ==== Log to multiple remote destinations via the syslog protocol.
 
-Note that the destinations and their services need unique names. For the destinations 
-their name is also the hostname or ip of the remote syslog server.
+Note that the destinations and their logpaths need unique names. For the destinations 
+the name is also the hostname or ip of the remote syslog server.
 
   class { 'syslogng':
     ensure => present,
-    services => {
+    logpaths => {
      'syslog-ng' => {}
     },
     destinations => {
-      'remote-host-a' => { 
+      'remote-host-a.example.com' => { 
         type => 'syslog', 
-        services => {
+        logpaths => {
           'syslog-ng-a' => {
-            service => 'syslog-ng'
+            logpath => 'syslog-ng'
           }
         }
       }
-      'remote-host-b' => {
+      'remote-host-b.example.com' => {
         type => 'syslog',
-        services => {
+        logpaths => {
           'syslog-ng-b' => {
-            service' => 'syslog-ng
+            logpath' => 'syslog-ng
           }
         }
       }
     }
   }
 
-With this setup Messages from the syslog-ng service will be logged to both servers as 
+With this setup Messages going the syslog-ng logpath will be logged to both servers as 
 well as to the local file system.
 
 === Developers
@@ -138,9 +138,9 @@ Pull Requests, Issues and other Feedback are very welcome!
 Please submit proper pull requests and be prepared to get nagged if you don't write spec
 first. Travis will run the tests for you and indicate their results in the pull request.
 
-I accept pull requests containing only spec. If you found some exotic use case that work 
-nicely on your infrastructure please consider documenting it in a spec case so future 
-updates of this module don't introduce breakage.
+I happily accept pull requests containing only spec. If you found some exotic use case 
+that work nicely on your infrastructure please consider documenting it in a spec case so 
+future updates of this module don't introduce breakage.
 
 The following commands come in handy when hacking with this module.
 
