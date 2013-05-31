@@ -130,7 +130,7 @@ the name is also the hostname or ip of the remote syslog server.
         type => 'syslog',
         logpaths => {
           'syslog-ng-b' => {
-            logpath' => 'syslog-ng
+            logpath => 'syslog-ng'
           }
         }
       }
