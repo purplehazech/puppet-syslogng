@@ -10,10 +10,10 @@ templates as I go.
 
 For the scope of this module I am defining completeness as follows:
 
-- [x] manage installation of syslog-ng package
-- [x] built in support for a lot of logs
-- [ ] manage source/destination setup with storeconfigs
-- [ ] good documentation
+- manage installation of syslog-ng package, done
+- built in support for a lot of logs, done
+- manage source/destination setup with storeconfigs
+- good documentation
 
 ### Usage
 
