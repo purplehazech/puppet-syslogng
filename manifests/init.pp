@@ -5,10 +5,9 @@
 #
 # === Usages
 #
-# Sources, logpaths and destinations are stored as files.
-# * files/scl/syslog-ng.conf.d
+# Sources, logpaths and destinations are stored in files/scl/syslog-ng.conf.d.
 #
-# An example config using files from there looks like so.
+# An example config such files looks like so.
 #
 #   class { syslogng:
 #     ensure        => present,
@@ -31,38 +30,42 @@
 # === Parameters
 #
 # [*ensure*]
-# Main module switch used to enable or disable installation and configuration
-# of syslog-ng package.
+#  Main module switch used to enable or disable installation and configuration
+#  of syslog-ng package.
 # [*conf_dir*]
-# Base directory of syslog-ng config files.
+#  Base directory of syslog-ng config files.
 # [*log_dir*]
-# Base directory to log into, this is where a syslog subdir is created.
-# Default: /var/log
+#  Base directory to log into, this is where a syslog subdir is created.
+#  Default: /var/log
 # [*sources*]
-# Hash of sources to configure. Default:
+#  Hash of sources to configure. Default:
 #   {
 #     'default' => {},
 #     'kernel' => {}
 #   }
 # [*logpaths*]
-# Hash of logpaths to configure. Default:
-#   { 'syslog-ng' => {} }
-# See the README for a complete list of logpaths.
+#  Hash of logpaths to configure.
+#  Default:
+#    { 'syslog-ng' => {} }
+#  See the README for a complete list of logpaths.
 # [*destinations*]
-# Hash of log destinations. Default:
-#   {
-#     'messages' => {},
-#     'console'  => {},
-#     'kernel'   => {},
-#   }
+#  Hash of log destinations.
+#  Default:
+#    {
+#      'messages' => {},
+#      'console'  => {},
+#      'kernel'   => {},
+#    }
 # [*chain_hostnames*]
-# Enable or disable the chained hostname format. Default: false
+#  Enable or disable the chained hostname format.
+#  Default: false
 # [*flush_lines*]
-# Specifies how many lines are flushed to a destination at a time. Default: 0
+#  Specifies how many lines are flushed to a destination at a time.
+#  Default: 0
 # [*log_fifo_size*]
-# The number of entries in the output fifo.
+#  The number of entries in the output fifo.
 # [*stats_freq*]
-# The period between two STATS messages in seconds.
+#  The period between two STATS messages in seconds.
 #
 class syslogng (
   $ensure          = present,
