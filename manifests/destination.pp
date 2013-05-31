@@ -13,8 +13,7 @@
 #  configuration parent dir.
 #  Default: /etc/syslog-ng
 # [*type*]
-#  Type of destination to create, currently file and syslog are supported.
-#  Default: file
+#  Type of destination to create must be file.
 # [*...*]
 #  Remaining parameters are not used by this module but are replicated here to
 #  support an api that is designed looking ahead at the nice filter features in

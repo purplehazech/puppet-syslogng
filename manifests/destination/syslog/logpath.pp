@@ -1,5 +1,9 @@
 # == Define: syslogng::destination::syslog::logpath
 #
+# Define used to create the logpath for individual syslogng::destination
+# needed for each syslog destination.
+#
+# Do not use this class directly it is not considered part of the public api.
 #
 define syslogng::destination::syslog::logpath (
   $ensure   = present,

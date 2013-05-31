@@ -1,6 +1,6 @@
 # == Define: syslogng::source
 #
-# Create a syslog-ng source.
+# Create a default file based syslog-ng source.
 #
 # === Parameters
 #
