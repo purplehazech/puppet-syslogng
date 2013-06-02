@@ -46,7 +46,10 @@
 # [*logpaths*]
 #  Hash of logpaths to configure.
 #  Default:
-#    { 'syslog-ng' => {} }
+#    {
+#      'syslog-ng' => {},
+#      'puppet' => {},
+#    }
 #  See the README for a complete list of logpaths.
 # [*destinations*]
 #  Hash of log destinations.
@@ -77,6 +80,7 @@ class syslogng (
   },
   $logpaths        = {
     'syslog-ng' => {},
+    'puppet' => {},
   },
   $destinations    = {
     'messages' => {},
