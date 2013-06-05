@@ -122,7 +122,8 @@ the name is also the hostname or ip of the remote syslog server.
   class { 'syslogng':
     ensure => present,
     logpaths => {
-     'syslog-ng' => {}
+     'syslog-ng' => {},
+     'puppet-agent' => {},
     },
     destinations => {
       'remote-host-a.example.com' => {
@@ -130,6 +131,9 @@ the name is also the hostname or ip of the remote syslog server.
         logpaths => {
           'syslog-ng-a' => {
             logpath => 'syslog-ng'
+          },
+          'puppet-agent-a' => {
+            logpath => 'puppet-agent'
           }
         }
       }
@@ -146,7 +150,8 @@ the name is also the hostname or ip of the remote syslog server.
 ```
 
 With this setup Messages going the syslog-ng logpath will be logged to both servers as
-well as to the local file system.
+well as to the local file system. The puppet-agent logpath only goes to the first server
+and the local file system.
 
 ### Integrating this module with other puppet modules
 
