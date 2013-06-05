@@ -79,6 +79,7 @@ If you want to show off all the logpaths, you would do that like so.
       'postfix' => {},
       'postgres' => {},
       'provisioning' => {},
+      'puppet' => {},
       'pure-ftpd' => {},
       'racoon' => {},
       'radiusd' => {},

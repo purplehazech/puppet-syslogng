@@ -234,6 +234,11 @@ describe 'syslogng' do
       should contain_syslogng__logpath('syslog-ng').with({:ensure => 'present'})
     }
   end
+  context "define puppet-agent logpath" do
+    it {
+      should contain_syslogng__logpath('puppet-agent').with({:ensure => 'present'})
+    }
+  end
   context "logpath config from param" do
     let(:params) do
       {
