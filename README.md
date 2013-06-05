@@ -10,10 +10,10 @@ templates as I go.
 
 For the scope of this module I am defining completeness as follows:
 
-- manage installation of syslog-ng package, done
-- built in support for a lot of logs, done
-- manage source/destination setup with storeconfigs
-- good documentation
+- manage installation of syslog-ng package (done)
+- built in support for a lot of logs (done)
+- manage source/destination setup with storeconfigs (syslog destination implemented, needs source and storeconfig setup)
+- good documentation (wip)
 
 ### Usage
 
@@ -79,7 +79,8 @@ If you want to show off all the logpaths, you would do that like so.
       'postfix' => {},
       'postgres' => {},
       'provisioning' => {},
-      'puppet' => {},
+      'puppet-agent' => {},
+      'puppet-master' => {},
       'pure-ftpd' => {},
       'racoon' => {},
       'radiusd' => {},
@@ -148,12 +149,13 @@ Pull Requests, Issues and other Feedback are very welcome!
 
 Please submit proper pull requests and be prepared to get nagged if you don't write spec
 first. Travis will run the tests for you and indicate their results in the pull request.
+Please split your pull requests into multiple commits and demonstrate failing spec early.
 
-I happily accept pull requests containing only spec. If you found some exotic use case
-that work nicely on your infrastructure please consider documenting it in a spec case so
-future updates of this module don't introduce breakage.
+I happily accept pull requests containing only spec and/or docs. If you found some exotic
+use case that work nicely on your infrastructure please consider documenting it in a spec
+case so future updates of this module don't introduce breakage.
 
-The following commands come in handy when hacking with this module.
+The following commands come in handy when hacking this module.
 
 ```sh
   rake lint
