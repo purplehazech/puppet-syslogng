@@ -80,7 +80,7 @@ class syslogng (
   },
   $logpaths        = {
     'syslog-ng' => {},
-    'puppet' => {},
+    'puppet-agent' => {},
   },
   $destinations    = {
     'messages' => {},
