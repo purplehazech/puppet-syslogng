@@ -14,13 +14,13 @@ For the scope of this module I am defining completeness as follows:
 - manage source/destination setup with storeconfigs (syslog destination implemented, needs source and storeconfig setup)
 - good documentation (wip)
 
-In the long run this module aims to be the most complete syslog-ng puppet module
+In the long run the syslogng puppet module aims to be the most complete syslog-ng puppet module
 available. Please consider joining the effort to help us get there.
 
 ### Usage
 
-For a simple solution just include the syslogng puppet module. This just installs a 
-bare syslog-ng configuration. Only the syslog-ng and puppet-agent log messages get a
+For a simple solution just include the syslogng puppet module. This installs syslog-ng
+with a bare configuration. Only the syslog-ng and puppet-agent log messages get a
 logpath in this configuration.
 
 ```puppet
@@ -28,7 +28,7 @@ logpath in this configuration.
 ```
 
 Let's say you have some services that need logpaths. You can use the create_resources
-api on the main class to specify the logpaths you need. Services usually consist of a
+api on the main class to specify the logpaths you need. Logpaths usually consist of a
 log entry and its needed filters and destinations.
 
 ```puppet
@@ -155,10 +155,10 @@ and the local file system.
 
 ### Integrating this module with other puppet modules
 
-Let's say you just puppetized you latest and greatest software and would like some nice
-logpaths for your thing to the syslogng puppet module.
+Let's say you just puppetized your latest and greatest software and would like to add some
+nice logpaths for your thing to the syslogng puppet module.
 
-The right file to do this in is README.md, just mention that your module is supported by
+The right file to do this is README.md, just mention that your module is supported by
 the syslogng puppet module. This keeps the logging and your modules concerns uncoupled
 and lets the end user decide on a logging solution. Great puppet solutions should be able
 to integrate with this on the node level.
