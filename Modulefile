@@ -21,4 +21,4 @@ It is no where near to being finished. I am publishing this
 version to solicit feedback and find contributors.
 
 The module adheres to semver.org versioning standards.'
-dependency 'puppetlabs/stdlib', '~4.1.0'
+dependency 'puppetlabs/stdlib', '4.x'
