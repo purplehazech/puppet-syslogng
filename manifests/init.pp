@@ -34,6 +34,9 @@
 #  of syslog-ng package.
 # [*conf_dir*]
 #  Base directory of syslog-ng config files.
+# [*purge_conf_dir*]
+#  Whether to purge the configuration directory
+#  Default: false
 # [*log_dir*]
 #  Base directory to log into, this is where a syslog subdir is created.
 #  Default: /var/log
@@ -73,6 +76,7 @@
 class syslogng (
   $ensure          = present,
   $conf_dir        = '/etc/syslog-ng',
+  $purge_conf_dir  = false,
   $log_dir         = '/var/log',
   $sources         = {
     'default' => {},
@@ -94,6 +98,7 @@ class syslogng (
 ) {
   validate_re($ensure, [ '^present', '^absent' ])
   validate_absolute_path($conf_dir)
+  validate_bool($purge_conf_dir)
   validate_absolute_path($log_dir)
   validate_bool($chain_hostnames)
   validate_re($flush_lines, '^[0-9]+$')
@@ -137,8 +142,9 @@ class syslogng (
     "${conf_dir}/modules.conf":
       ensure => $ensure_file,
       source => 'puppet:///modules/syslogng/scl/modules.conf';
+    "${log_dir}/syslog":
+      ensure => $ensure_directory;
     [
-      "${log_dir}/syslog",
       "${conf_dir}/patterndb.d",
       "${conf_dir}/syslog-ng.conf.d",
       "${conf_dir}/syslog-ng.conf.d/destination.d",
@@ -147,7 +153,10 @@ class syslogng (
       "${conf_dir}/syslog-ng.conf.d/log.d",
       "${conf_dir}/syslog-ng.conf.d/option.d",
     ]:
-      ensure => $ensure_directory;
+      ensure  => $ensure_directory,
+      purge   => $purge_conf_dir,
+      recurse => $purge_conf_dir,
+      force   => $purge_conf_dir;
     "${conf_dir}/syslog-ng.conf.d/option.d/default.conf":
       ensure  => $ensure_file,
       content => $default_conf;
