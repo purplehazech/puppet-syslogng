@@ -1,3 +1,7 @@
+## 0.3.0 - Config Purging Release
+
+* adds support for purging the config directory using the ``purge_conf_dir`` parameter (#6).
+
 ## 0.2.0 - Logpath Release
 
 * adds the following logpaths:
