@@ -118,6 +118,18 @@ The proper way to do all this would be from an external node classifier.
 
 ### Advanced Examples
 
+#### Purge existing configuration
+
+You can set the ``purge_conf_dir`` parameter to ``true`` to remove all existing configs
+from the syslog-ng configuration directory.
+
+```puppet
+  class { 'syslogng':
+    ensure         => present,
+    purge_conf_dir => true,
+  }
+```
+
 #### Log to multiple remote destinations via the syslog protocol.
 
 Note that the destinations and their logpaths need unique names. For the destinations
