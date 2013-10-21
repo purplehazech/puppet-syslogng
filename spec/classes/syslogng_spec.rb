@@ -91,6 +91,33 @@ describe 'syslogng' do
       should contain_file('/etc/syslog-ng/syslog-ng.conf.d/option.d').with({:ensure => 'absent'})
     }
   end
+  context "not purge config dirs by default" do
+    it {
+      should contain_file('/etc/syslog-ng/patterndb.d').with({:purge => false, :force => false, :recurse => false})
+      should contain_file('/etc/syslog-ng/syslog-ng.conf.d').with({:purge => false, :force => false, :recurse => false})
+      should contain_file('/etc/syslog-ng/syslog-ng.conf.d/destination.d').with({:purge => false, :force => false, :recurse => false})
+      should contain_file('/etc/syslog-ng/syslog-ng.conf.d/filter.d').with({:purge => false, :force => false, :recurse => false})
+      should contain_file('/etc/syslog-ng/syslog-ng.conf.d/source.d').with({:purge => false, :force => false, :recurse => false})
+      should contain_file('/etc/syslog-ng/syslog-ng.conf.d/log.d').with({:purge => false, :force => false, :recurse => false})
+      should contain_file('/etc/syslog-ng/syslog-ng.conf.d/option.d').with({:purge => false, :force => false, :recurse => false})
+    }
+  end
+  context "purge config dirs when asked" do
+    let(:params) do
+      {
+        :purge_conf_dir => true
+      }
+    end
+    it {
+      should contain_file('/etc/syslog-ng/patterndb.d').with({:purge => true, :force => true, :recurse => true})
+      should contain_file('/etc/syslog-ng/syslog-ng.conf.d').with({:purge => true, :force => true, :recurse => true})
+      should contain_file('/etc/syslog-ng/syslog-ng.conf.d/destination.d').with({:purge => true, :force => true, :recurse => true})
+      should contain_file('/etc/syslog-ng/syslog-ng.conf.d/filter.d').with({:purge => true, :force => true, :recurse => true})
+      should contain_file('/etc/syslog-ng/syslog-ng.conf.d/source.d').with({:purge => true, :force => true, :recurse => true})
+      should contain_file('/etc/syslog-ng/syslog-ng.conf.d/log.d').with({:purge => true, :force => true, :recurse => true})
+      should contain_file('/etc/syslog-ng/syslog-ng.conf.d/option.d').with({:purge => true, :force => true, :recurse => true})
+    }
+  end
   context "start and ensure service" do
     it {
       should contain_service('syslog-ng').with({:ensure => 'running', :enable => 'true'})
