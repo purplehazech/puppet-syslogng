@@ -12,7 +12,7 @@ describe 'syslogng::destination::mongodb' do
       should contain_file("/etc/syslog-ng/syslog-ng.conf.d/destination.d/mongodb_dest-name.conf").with(
         {
           :ensure  => 'file',
-          :content => /.*d_mongodb-dest-name.*mongodb.*/m,
+          :content => /.*d_mongodb_dest-name.*mongodb.*/m,
         }
       )
       should contain_file("/etc/syslog-ng/syslog-ng.conf.d/log.d/00_mongodb_syslog-ng.conf").with(
