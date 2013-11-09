@@ -309,4 +309,14 @@ describe 'syslogng' do
       should contain_syslogng__destination__syslog('remote-server-hostname')
     }
   end
+  context "mongodb destination from destination param via type hint" do
+    let(:params) do
+      {
+        :destinations => { "mongodb-dest-name" => { "type" => "mongodb" } }
+      }
+    end
+    it {
+      should contain_syslogng__destination__mongodb('mongodb-dest-name')
+    }
+  end
 end
