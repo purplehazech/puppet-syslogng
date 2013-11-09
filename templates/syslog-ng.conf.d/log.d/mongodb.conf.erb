@@ -1,0 +1,3 @@
+# mongodb log for <%= @logpath_name %>
+
+log { source(s_log); filter(f_<%= @logpath_name %>); destination(d_mongodb_<%= @destination %>); };
