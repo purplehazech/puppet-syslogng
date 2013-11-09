@@ -170,6 +170,30 @@ With this setup Messages going the syslog-ng logpath will be logged to both serv
 well as to the local file system. The puppet-agent logpath only goes to the first server
 and the local file system.
 
+#### Log to mongodb
+
+Setting up mongodb is similar to using remote syslog-ng destinations.
+
+```puppet
+  class { ' syslogng':
+    ensure => present,
+    logpaths => {
+      'syslog-ng' => {},
+      'puppet-agent' => {},
+    },
+    destinations => {
+      'mongodb' => {
+        'type' => 'mongodb',
+        logpaths => {
+          'syslog-ng-mongodb' => {
+            logpath => 'syslog-ng'
+          },
+        },
+      },
+    },
+  }
+```
+
 ### Integrating this module with other puppet modules
 
 Let's say you just puppetized your latest and greatest software and would like to add some
