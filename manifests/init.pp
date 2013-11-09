@@ -202,4 +202,10 @@ class syslogng (
     $default_destination
   )
 
+  create_resources(
+    syslogng::destination::mongodb,
+    $destinations,
+    $default_destination
+  )
+
 }
