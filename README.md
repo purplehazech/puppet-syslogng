@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/purplehazech/puppet-syslogng.png?branch=master)](https://travis-ci.org/purplehazech/puppet-syslogng)
 
-The syslogng puppet module sets up and manages syslog-ng.
+The syslogng puppet module sets up and manages syslog-ng. This module supports syslog-ng versions > 3.2. The required syslog-ng version will be bumped to 3.4 in the next release of this module (0.5.0).
 
 The idea is to use the rather complete scl configuration in the [stepping-stone syslog-ng repo](https://github.com/stepping-stone/syslog-ng) as a basic configuration 
 while adding things that need machine specific configuration through puppet templates.
