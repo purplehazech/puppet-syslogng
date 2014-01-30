@@ -1,3 +1,6 @@
+## 0.4.0 - syslog-ng 3.4 Preparation Release
+
+* update README to reflect that we will be moving to syslog-ng 3.4 in the next Release
 ## 0.3.0 - Config Purging Release
 
 * adds support for purging the config directory using the ``purge_conf_dir`` parameter (#6).
