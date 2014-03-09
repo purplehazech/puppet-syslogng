@@ -1,3 +1,24 @@
+## 0.5.0 - syslog-ng 3.4 Bump
+
+* bump required syslog-ng version to 3.4
+* add the following logpaths:
+    * bluetoothd
+    * dbus
+    * haveged
+    * laptop-mode
+    * lightdm
+    * NetworkManager
+    * polkitd
+    * snmptrapd
+    * smartd
+    * sst-firewall
+    * SuSEfirewall2
+    * tor
+    * ucarp-hook
+    * uwsgi
+* drop experimental ``rspec-hiera-puppet`` support
+* fixed travis config so build matrix shows all supported puppet versions
+
 ## 0.4.0 - syslog-ng 3.4 Preparation Release
 
 * update README to reflect that we will be moving to syslog-ng 3.4 in the next Release
