@@ -1,5 +1,5 @@
 name 'purplehazech-syslogng'
-version '0.5.0-develop'
+version '0.5.0'
 
 author 'Lucas S. Bickel'
 license 'AGPL3+'
