@@ -1,3 +1,19 @@
+## 0.7.0 - upstream merge and rspec fixes
+
+* new modules from stepping-stone/syslog-ng
+** PHP (php)
+** FastCGI Process Manager for PHP (php-fpm).
+** ASunder (asunder)
+** GNOME Keyring Daemon (gnome-keyring-daemon)
+** HAProxy (haproxy)
+** pgpool-II (pgpool)
+** stoney cloud (stoney-cloud)
+** OpenERP Server (openerp-server)
+** Transmission BitTorrent Client (transmission-daemon)
+* increased code coverage in rspec tests
+* added new puppet versions to travis-ci checks
+* switch to ``metadata.json`` from ``Modulefile``
+
 ## 0.6.0 - FreeBSD support
 
 * add default source for FreeBSD (issue #8)
