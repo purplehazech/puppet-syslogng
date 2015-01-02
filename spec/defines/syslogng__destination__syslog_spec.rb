@@ -9,6 +9,7 @@ describe 'syslogng::destination::syslog' do
       }
     end
     it {
+      should contain_syslogng__destination__syslog('remote-server-hostname')
       should contain_file("/etc/syslog-ng/syslog-ng.conf.d/destination.d/syslog_remote-server-hostname.conf").with(
         {
           :ensure  => 'file',
@@ -21,6 +22,7 @@ describe 'syslogng::destination::syslog' do
           :content => /^.*log \{ source\(s_log\); filter\(f_syslog-ng\); destination\(d_syslog_remote-server-hostname\); \};.*/,
         }
       )
+      should contain_syslogng__destination__syslog__logpath('syslog-ng')
     }
   end
   context "priority configurable" do

@@ -21,7 +21,7 @@ define syslogng::source (
     default => $ensure
   }
 
-  $file_source = $osfamily ? {
+  $file_source = $::osfamily ? {
     'FreeBSD' => $title ? {
       'default' => "puppet:///modules/syslogng/source.d/${title}_freebsd.conf",
       default   => "puppet:///modules/syslogng/scl/syslog-ng.conf.d/source.d/${title}.conf",

@@ -7,6 +7,9 @@ describe 'syslogng' do
         :ensure => 'present',
       }
     end
+    it {
+      should contain_syslogng
+    }
   end
   context "will install package" do
     let(:params) do
@@ -16,6 +19,16 @@ describe 'syslogng' do
     end
     it {
       should contain_package('syslog-ng').with({:ensure => 'present'})
+    }
+  end
+  context "will create logdir" do
+    let(:params) do
+      {
+        :ensure => 'present'
+      }
+    end
+    it {
+      should contain_file('/var/log/syslog').with({:ensure => 'directory'})
     }
   end
   context "will fail on invalid ensure parameter" do
@@ -64,7 +77,7 @@ describe 'syslogng' do
       should contain_file('/etc/syslog-ng/syslog-ng.conf.d/option.d/default.conf').with({:ensure => 'absent'});
     }
   end
-  context "check for config dirs" do
+  context "check for config dirs and default files" do
     it {
       should contain_file('/etc/syslog-ng/patterndb.d').with({:ensure => 'directory'})
       should contain_file('/etc/syslog-ng/syslog-ng.conf.d').with({:ensure => 'directory'})
@@ -147,10 +160,25 @@ describe 'syslogng' do
       should contain_file('/my/conf/dir/patterndb.d')
       should contain_file('/my/conf/dir/syslog-ng.conf.d')
       should contain_file('/my/conf/dir/syslog-ng.conf.d/destination.d')
+      ['messages', 'syslog-ng', 'console', 'kernel', 'puppet-agent'].each do |dest|
+        should contain_file("/my/conf/dir/syslog-ng.conf.d/destination.d/#{dest}.conf")
+      end
+      ['console', 'kernel', 'messages'].each do |dest|
+        should contain_syslogng__destination__syslog(dest)
+      end
       should contain_file('/my/conf/dir/syslog-ng.conf.d/filter.d')
+      ['facilities', 'puppet-agent', 'syslog-ng'].each do |filter|
+        should contain_file("/my/conf/dir/syslog-ng.conf.d/filter.d/#{filter}.conf")
+      end
       should contain_file('/my/conf/dir/syslog-ng.conf.d/source.d')
+      should contain_file('/my/conf/dir/syslog-ng.conf.d/source.d/default.conf')
+      should contain_file('/my/conf/dir/syslog-ng.conf.d/source.d/kernel.conf')
       should contain_file('/my/conf/dir/syslog-ng.conf.d/log.d')
+      ['90_puppet-agent', '90_syslog-ng', '99_catch-all'].each do |log|
+        should contain_file("/my/conf/dir/syslog-ng.conf.d/log.d/#{log}.conf")
+      end
       should contain_file('/my/conf/dir/syslog-ng.conf.d/option.d')
+      should contain_file('/my/conf/dir/syslog-ng.conf.d/option.d/default.conf')
     }
   end
   context "check for invalid conf dirs" do
@@ -264,6 +292,8 @@ describe 'syslogng' do
   context "define puppet-agent logpath" do
     it {
       should contain_syslogng__logpath('puppet-agent').with({:ensure => 'present'})
+      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/filter.d/puppet-agent.conf")
+      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/log.d/90_puppet-agent.conf")
     }
   end
   context "logpath config from param" do
@@ -275,6 +305,8 @@ describe 'syslogng' do
     it {
       should contain_syslogng__logpath('syslog-ng').with({:ensure => 'present'})
       should contain_syslogng__logpath('radius').with({:ensure => 'present'})
+      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/filter.d/radius.conf")
+      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/log.d/90_radius.conf")
     }
   end
   context "destination config from param" do
@@ -306,6 +338,7 @@ describe 'syslogng' do
       }
     end
     it {
+      should contain_syslogng__destination('remote-server-hostname')
       should contain_syslogng__destination__syslog('remote-server-hostname')
     }
   end
