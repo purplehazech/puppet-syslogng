@@ -3,7 +3,7 @@
   "version": "0.8.0-develop",
   "author": "Lucas S. Bickel",
   "summary": "manage syslog-ng configuration",
-  "license": "AGPL-3.0+",
+  "license": "AGPL-3.0",
   "source": "https://github.com/purplehazech/puppet-syslogng.git",
   "project_page": "https://github.com/purplehazech/puppet-syslogng",
   "issues_url": "https://github.com/purplehazech/puppet-syslogng/issues",
