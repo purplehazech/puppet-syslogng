@@ -1,6 +1,6 @@
 {
   "name": "purplehazech-syslogng",
-  "version": "0.7.0",
+  "version": "0.8.0-develop",
   "author": "Lucas S. Bickel",
   "summary": "manage syslog-ng configuration",
   "license": "AGPL-3.0+",
