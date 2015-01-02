@@ -9,6 +9,7 @@ describe 'syslogng::destination::syslog' do
       }
     end
     it {
+      should contain_syslogng__destination__syslog('remote-server-hostname')
       should contain_file("/etc/syslog-ng/syslog-ng.conf.d/destination.d/syslog_remote-server-hostname.conf").with(
         {
           :ensure  => 'file',

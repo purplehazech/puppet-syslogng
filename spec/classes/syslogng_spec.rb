@@ -7,6 +7,9 @@ describe 'syslogng' do
         :ensure => 'present',
       }
     end
+    it {
+      should contain_syslogng
+    }
   end
   context "will install package" do
     let(:params) do
@@ -16,6 +19,16 @@ describe 'syslogng' do
     end
     it {
       should contain_package('syslog-ng').with({:ensure => 'present'})
+    }
+  end
+  context "will create logdir" do
+    let(:params) do
+      {
+        :ensure => 'present'
+      }
+    end
+    it {
+      should contain_file('/var/log/syslog').with({:ensure => 'directory'})
     }
   end
   context "will fail on invalid ensure parameter" do
@@ -64,7 +77,7 @@ describe 'syslogng' do
       should contain_file('/etc/syslog-ng/syslog-ng.conf.d/option.d/default.conf').with({:ensure => 'absent'});
     }
   end
-  context "check for config dirs" do
+  context "check for config dirs and default files" do
     it {
       should contain_file('/etc/syslog-ng/patterndb.d').with({:ensure => 'directory'})
       should contain_file('/etc/syslog-ng/syslog-ng.conf.d').with({:ensure => 'directory'})
@@ -279,6 +292,8 @@ describe 'syslogng' do
   context "define puppet-agent logpath" do
     it {
       should contain_syslogng__logpath('puppet-agent').with({:ensure => 'present'})
+      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/filter.d/puppet-agent.conf")
+      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/log.d/90_puppet-agent.conf")
     }
   end
   context "logpath config from param" do
@@ -290,6 +305,8 @@ describe 'syslogng' do
     it {
       should contain_syslogng__logpath('syslog-ng').with({:ensure => 'present'})
       should contain_syslogng__logpath('radius').with({:ensure => 'present'})
+      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/filter.d/radius.conf")
+      should contain_file("/etc/syslog-ng/syslog-ng.conf.d/log.d/90_radius.conf")
     }
   end
   context "destination config from param" do
@@ -321,6 +338,7 @@ describe 'syslogng' do
       }
     end
     it {
+      should contain_syslogng__destination('remote-server-hostname')
       should contain_syslogng__destination__syslog('remote-server-hostname')
     }
   end

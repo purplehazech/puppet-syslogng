@@ -10,6 +10,7 @@ describe 'syslogng::destination' do
         }
       end
       it {
+        should contain_syslogng__destination(sut)
         should contain_file("/etc/syslog-ng/syslog-ng.conf.d/destination.d/#{sut}.conf").with(
           {
             :ensure => 'file',
