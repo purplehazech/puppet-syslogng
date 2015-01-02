@@ -147,10 +147,22 @@ describe 'syslogng' do
       should contain_file('/my/conf/dir/patterndb.d')
       should contain_file('/my/conf/dir/syslog-ng.conf.d')
       should contain_file('/my/conf/dir/syslog-ng.conf.d/destination.d')
+      ['messages', 'syslog-ng', 'console', 'kernel', 'puppet-agent'].each do |dest|
+        should contain_file("/my/conf/dir/syslog-ng.conf.d/destination.d/#{dest}.conf")
+      end
       should contain_file('/my/conf/dir/syslog-ng.conf.d/filter.d')
+      ['facilities', 'puppet-agent', 'syslog-ng'].each do |filter|
+        should contain_file("/my/conf/dir/syslog-ng.conf.d/filter.d/#{filter}.conf")
+      end
       should contain_file('/my/conf/dir/syslog-ng.conf.d/source.d')
+      should contain_file('/my/conf/dir/syslog-ng.conf.d/source.d/default.conf')
+      should contain_file('/my/conf/dir/syslog-ng.conf.d/source.d/kernel.conf')
       should contain_file('/my/conf/dir/syslog-ng.conf.d/log.d')
+      ['90_puppet-agent', '90_syslog-ng', '99_catch-all'].each do |log|
+        should contain_file("/my/conf/dir/syslog-ng.conf.d/log.d/#{log}.conf")
+      end
       should contain_file('/my/conf/dir/syslog-ng.conf.d/option.d')
+      should contain_file('/my/conf/dir/syslog-ng.conf.d/option.d/default.conf')
     }
   end
   context "check for invalid conf dirs" do
