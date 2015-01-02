@@ -1,3 +1,7 @@
+## 0.6.0 - FreeBSD support
+
+* add default source for FreeBSD (issue #8)
+
 ## 0.5.0 - syslog-ng 3.4 Bump
 
 * bump required syslog-ng version to 3.4
