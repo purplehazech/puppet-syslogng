@@ -42,5 +42,3 @@ matrix:
       rvm: 2.1.0
     - env: PUPPET_VERSION=3.3.2
       rvm: 2.1.0
-    - env: PUPPET_VERSION=3.5.1
-      rvm: 2.1.0
