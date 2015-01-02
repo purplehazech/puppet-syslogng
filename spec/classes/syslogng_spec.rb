@@ -150,6 +150,9 @@ describe 'syslogng' do
       ['messages', 'syslog-ng', 'console', 'kernel', 'puppet-agent'].each do |dest|
         should contain_file("/my/conf/dir/syslog-ng.conf.d/destination.d/#{dest}.conf")
       end
+      ['console', 'kernel', 'messages'].each do |dest|
+        should contain_syslogng__destination__syslog(dest)
+      end
       should contain_file('/my/conf/dir/syslog-ng.conf.d/filter.d')
       ['facilities', 'puppet-agent', 'syslog-ng'].each do |filter|
         should contain_file("/my/conf/dir/syslog-ng.conf.d/filter.d/#{filter}.conf")
