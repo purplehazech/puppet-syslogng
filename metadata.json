@@ -1,0 +1,13 @@
+{
+  "name": "purplehazech-syslogng",
+  "version": "0.6.0",
+  "author": "Lucas S. Bickel",
+  "summary": "manage syslog-ng configuration",
+  "license": "AGPL3+",
+  "source": "https://github.com/purplehazech/puppet-syslogng.git",
+  "project_page": "https://github.com/purplehazech/puppet-syslogng",
+  "issues_url": "https://github.com/purplehazech/puppet-syslogng/issues",
+  "dependencies": [
+    {"name":"puppetlabs/stdlib","version_requirement":"4.x"}
+  ]
+}
