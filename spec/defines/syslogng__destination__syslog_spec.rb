@@ -21,6 +21,7 @@ describe 'syslogng::destination::syslog' do
           :content => /^.*log \{ source\(s_log\); filter\(f_syslog-ng\); destination\(d_syslog_remote-server-hostname\); \};.*/,
         }
       )
+      should contain_syslogng__destination__syslog__logpath('syslog-ng')
     }
   end
   context "priority configurable" do
