@@ -1,0 +1,6 @@
+# Network listener for <%= title %>
+
+source s_<%= title %> {
+  <% if @tcp_port -%>tcp(ip(<%= @source_ip %>) port(<%= @tcp_port %>) <% if @tcp_max_connections %>max_connections(<%= @tcp_max_connections %>)<% end -%>);<% end %>
+  <% if @udp_port -%>udp(ip(<%= @source_ip %>) port(<%= @udp_port %>));<% end %>
+};

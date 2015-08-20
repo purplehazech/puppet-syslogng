@@ -86,6 +86,8 @@ class syslogng (
     'syslog-ng' => {},
     'puppet-agent' => {},
   },
+  $network_sources = {
+  },
   $destinations    = {
     'messages' => {},
     'console'  => {},
@@ -172,6 +174,12 @@ class syslogng (
   }
 
   create_resources(syslogng::source, $sources, {
+    ensure   => $ensure,
+    conf_dir => $conf_dir,
+    notify   => Service['syslog-ng'],
+  })
+
+  create_resources(syslogng::network_source, $network_sources, {
     ensure   => $ensure,
     conf_dir => $conf_dir,
     notify   => Service['syslog-ng'],
