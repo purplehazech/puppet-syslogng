@@ -92,9 +92,9 @@ class syslogng (
     'kernel'   => {},
   },
   $chain_hostnames = false,
-  $flush_lines     = 0,
-  $log_fifo_size   = 1000,
-  $stats_freq      = 43200
+  $flush_lines     = '0',
+  $log_fifo_size   = '1000',
+  $stats_freq      = '43200'
 ) {
   validate_re($ensure, [ '^present', '^absent' ])
   validate_absolute_path($conf_dir)
