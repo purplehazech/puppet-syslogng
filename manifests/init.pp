@@ -145,6 +145,8 @@ class syslogng (
     "${log_dir}/syslog":
       ensure => $ensure_directory;
     [
+      "${conf_dir}/scl",
+      "${conf_dir}/scl/pacct",
       "${conf_dir}/patterndb.d",
       "${conf_dir}/syslog-ng.conf.d",
       "${conf_dir}/syslog-ng.conf.d/destination.d",
@@ -166,6 +168,8 @@ class syslogng (
     "${conf_dir}/syslog-ng.conf.d/log.d/99_catch-all.conf":
       ensure => $ensure_file,
       source => "${confd_path}/log.d/99_catch-all.conf";
+    "${conf_dir}/scl/pacct/plugin.conf":
+      ensure  => present,
   } ~> service { 'syslog-ng':
     ensure => $ensure_service,
     enable => $enable_service,
